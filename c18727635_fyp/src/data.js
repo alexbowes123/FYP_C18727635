@@ -1,7 +1,7 @@
 export const sportCategories = [
     {
         id: 1,
-        img: "https://pixabay.com/get/gd0f18a3c3848ec8d2a4490717e1e517c934948aa7fcec453e72f36070d6bcceb46036cc7b60119e578c86fd144a355ae980c429b230ae97adc2af87616f598d8e914ca07c5e00902d29fee4b1d3cec51_640.jpg",
+        img: "https://cdn.pixabay.com/photo/2017/03/29/09/25/jiu-jitsu-2184597_1280.jpg",
         title: "BRAZILIAN JIU JITSU",
     },
     {
