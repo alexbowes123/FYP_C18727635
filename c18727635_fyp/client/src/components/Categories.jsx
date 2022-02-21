@@ -9,11 +9,13 @@ const Container = styled.div`
 `
 
 const Categories = () => {
-    return <Container>
-        {sportCategories.map(item => (
-            <CategoryItem item = {item}/>
+    return (
+    <Container>
+        {sportCategories.map((item) => (
+            <CategoryItem item = {item} key = {item.id}/>
         ))}
-    </Container>;  
+    </Container>
+    );
 };
 
 export default Categories;

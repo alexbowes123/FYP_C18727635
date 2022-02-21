@@ -1,5 +1,6 @@
 import Home from "./pages/Home";
 import ProductList from "./pages/ProductList";
+import axios from "axios";
 
 import React from "react";
 import {
@@ -9,19 +10,22 @@ import {
   Link
 } from "react-router-dom";
 
+
 const App = () => {
     return (
 
         // Using react router dom
         <Router>
             <Routes>
-            <Route path='/' element={<Home/>} />
-            <Route path='/products' element={<ProductList/>} />
+            <Route exact path='/' element={<Home/>} />
+
+            {/* bring to page of products by category */}
+            <Route path='/products/:category' element={<ProductList/>} />
+
+            {/* search for an individual product */}
+            {/* <Route path='/product/:id' element={<Product/>} /> */}
               
-                {/* </Route> */}
-                {/* <Route path = '/products'>
-                    <ProductList/>
-                </Route> */}
+         
             </Routes>
         </Router>
     );

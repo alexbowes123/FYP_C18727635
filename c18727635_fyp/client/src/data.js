@@ -3,20 +3,64 @@ export const sportCategories = [
         id: 1,
         img: "https://cdn.pixabay.com/photo/2017/03/29/09/25/jiu-jitsu-2184597_1280.jpg",
         title: "BRAZILIAN JIU JITSU",
+        ctg:"bjj"
     },
     {
         id: 2,
         img: "https://cdn.pixabay.com/photo/2020/06/12/00/11/boxing-5288635_1280.jpg",
         title: "BOXING",
+        cat:"boxing"
     },
     {
         id: 3,
         img: "https://cdn.pixabay.com/photo/2020/04/16/16/21/sunset-5051305_1280.jpg",
         title: "KARATE",
+        cat:"karate"
     },
     {
         id: 4,
         img: "https://cdn.pixabay.com/photo/2014/04/28/11/08/judo-333779_1280.jpg",
         title: "JUDO",
+        cat:"judo"
     }
 ]
+
+
+
+//PLACEHOLDER PRODUCTS
+
+
+  export const popularProducts = [
+    {
+      id:1,
+      img:"https://d3o2e4jr3mxnm3.cloudfront.net/Mens-Jake-Guitar-Vintage-Crusher-Tee_68382_1_lg.png",
+    },
+    {
+      id:2,
+      img:"https://cdn.shopify.com/s/files/1/0101/4832/products/Angela_Natural_Tee.png?v=1606780388",
+    },
+    {
+      id:3,
+      img:"https://www.prada.com/content/dam/pradanux_products/U/UCS/UCS319/1YOTF010O/UCS319_1YOT_F010O_S_182_SLF.png",
+    },
+    {
+      id:4,
+      img:"https://www.burdastyle.com/pub/media/catalog/product/cache/7bd3727382ce0a860b68816435d76e26/107/BUS-PAT-BURTE-1320516/1170x1470_BS_2016_05_132_front.png",
+    },
+    {
+      id:5,
+      img:"https://images.ctfassets.net/5gvckmvm9289/3BlDoZxSSjqAvv1jBJP7TH/65f9a95484117730ace42abf64e89572/Noissue-x-Creatsy-Tote-Bag-Mockup-Bundle-_4_-2.png",
+    },
+    {
+      id:6,
+      img:"https://d3o2e4jr3mxnm3.cloudfront.net/Rocket-Vintage-Chill-Cap_66374_1_lg.png",
+    },
+    {
+      id:7,
+      img:"https://www.vintageindustries.nl/download_front/qympzk1762/2217_Arrow_Jacket_Forest.png",
+    },
+    {
+      id:8,
+      img:"https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png",
+    },
+  ]
