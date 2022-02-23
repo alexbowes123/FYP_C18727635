@@ -3,7 +3,7 @@ export const sportCategories = [
         id: 1,
         img: "https://cdn.pixabay.com/photo/2017/03/29/09/25/jiu-jitsu-2184597_1280.jpg",
         title: "BRAZILIAN JIU JITSU",
-        ctg:"bjj"
+        cat:"bjj"
     },
     {
         id: 2,

@@ -22,7 +22,12 @@ const Products = ({cat,filters,sort}) => {
     useEffect(()=>{
         const getProducts = async () =>{
             try{
-                const res = await axios.get("http://localhost:5000/api/products");
+                // get products, if there is a category parameter, fetch by category, else
+                // get all products
+                const res = await axios.get(
+                    cat
+                    ? `http://localhost:5000/api/products?category=${cat}` 
+                    : "http://localhost:5000/api/products");
                 console.log(res);
             } catch(error){}
         };
