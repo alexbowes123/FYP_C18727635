@@ -7,6 +7,9 @@ const Container = styled.div`
     margin: 5px;
     min-width: 280px;
     height: 350px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 `
 
 const Circle = styled.div`
@@ -25,12 +28,19 @@ const Info = styled.div`
 const Icon = styled.div`
 
 `
+
+const Title = styled.div`
+
+`
 const Product = ({item}) => {
     return (
         <Container>
             <Circle/>
             <Image src = {item.img}/>
             <Info>
+                <Title>
+                    <h4>{item.title}</h4>
+                </Title>
                 <Icon>
                     <ShoppingCartOutlined/>
                 </Icon>
