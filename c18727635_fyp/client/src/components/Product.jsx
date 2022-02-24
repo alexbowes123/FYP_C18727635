@@ -32,6 +32,9 @@ const Icon = styled.div`
 const Title = styled.div`
 
 `
+const Price = styled.div`
+
+`
 const Product = ({item}) => {
     return (
         <Container>
@@ -41,6 +44,9 @@ const Product = ({item}) => {
                 <Title>
                     <h4>{item.title}</h4>
                 </Title>
+                <Price>
+                    <h4>€{item.price}</h4>
+                </Price>
                 <Icon>
                     <ShoppingCartOutlined/>
                 </Icon>

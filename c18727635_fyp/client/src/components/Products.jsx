@@ -14,15 +14,24 @@ const Container = styled.div`
 `
 
 const Products = ({cat,filters,sort}) => {
-    console.log(cat,filters,sort);
+    // console.log(cat,filters,sort);
 
+    //fetching data for products 
+
+
+    //an empty array
     const [products,setProducts] = useState([]);
+
+    //when filters are updated, update the products    
     const [filteredProducts,setFilteredProducts] = useState([]);
 
+
     useEffect(()=>{
+
+        // FUNCTION TO GET PRODUCTS
         const getProducts = async () =>{
             try{
-                // get products, if there is a category parameter, fetch by category, else
+                // if there is a category parameter, fetch by category, else
                 // get all products
                 const res = await axios.get(
                     cat
@@ -34,9 +43,9 @@ const Products = ({cat,filters,sort}) => {
                 setProducts(res.data);
             } catch(error){}
         };
-            getProducts();//
+        getProducts();
         
-    },[cat]);
+    },[cat]); // Dependency: when the category changes, run the useEffect
 
     useEffect(()=>{
         cat && setFilteredProducts(
@@ -47,6 +56,20 @@ const Products = ({cat,filters,sort}) => {
 
         );
     },[products,cat,filters])
+
+
+    //SORT ITEMS ALPHABETICALLY
+    useEffect(() =>{
+        if(sort==="asc"){
+            setFilteredProducts((prev) => 
+                [...prev].sort((a,b) => a.title.localeCompare(b.title))
+            );
+        } else if (sort ==="desc") {
+            setFilteredProducts((prev) =>
+                [...prev].sort((a,b)=> b.title.localeCompare(a.title))
+            );
+        }
+    },[sort]);
 
     return (
         <Container>
