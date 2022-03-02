@@ -1,10 +1,12 @@
 import { Badge } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { FavoriteOutlined, Search, ShoppingCartOutlined } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
     height: 60px; 
+    background-color: #232323;
 `
 
 const Wrapper = styled.div`
@@ -25,6 +27,7 @@ const Left = styled.div`
 const Language = styled.span`
     font-size: 14px;
     cursor: pointer;
+    color: white;
 `
 const SearchContainer = styled.div`
     border: 0.5px solid lightgray;
@@ -32,6 +35,7 @@ const SearchContainer = styled.div`
     align-items:center;
     margin-left:25px;
     padding: 5px;
+    background-color: white;
 `
 
 const Input = styled.input`
@@ -46,6 +50,7 @@ const Center = styled.div`
 
 const Logo = styled.h1`
   font-weight:bolder;
+  color: white;
 `
 const Right = styled.div`
     flex:1;
@@ -58,6 +63,7 @@ const MenuItem = styled.div`
     font-size:14px;
     cursor:pointer;
     margin-left:25px;
+    color: white;
 `
 
 
@@ -75,21 +81,23 @@ const Navbar = () => {
 
                 </Left>
                 <Center>
-                    <Logo>Blackbelt.</Logo>
+                <Link to="/" style={{ textDecoration: 'none' }}><Logo>Blackbelt.</Logo></Link>
                 </Center>
                 <Right>
-                    <MenuItem>REGISTER</MenuItem>
-                    <MenuItem>SIGN IN</MenuItem>
-                    <MenuItem>
+                
+                    <Link to="/register" style={{ textDecoration: 'none' }}> <MenuItem>REGISTER</MenuItem></Link>
+                    <Link to="/login" style={{ textDecoration: 'none' }}><MenuItem>SIGN IN</MenuItem></Link>
+                   
+                    <Link to="/checkout" style={{ textDecoration: 'none' }}><MenuItem>
                         <Badge badgeContent={4} color="primary">
                         <ShoppingCartOutlined/>
                         </Badge>
-                    </MenuItem>
-                    <MenuItem>
+                    </MenuItem></Link>
+                    <Link to="/wishlist" style={{ textDecoration: 'none' }}><MenuItem>
                         <Badge badgeContent={1} color="primary">
                         <FavoriteOutlined/>
                         </Badge>
-                    </MenuItem>
+                    </MenuItem></Link>
                 </Right>
             </Wrapper>
         </Container>

@@ -10,6 +10,7 @@ const Container = styled.div`
     display:flex;
     align-items: center;
     justify-content: center;
+    background-color: f2f2f2;
 `
 
 const Circle = styled.div`
@@ -22,6 +23,8 @@ const Image = styled.img`
 `
 
 const Info = styled.div`
+
+    padding-left: 10px;
 
 `
 

@@ -1,21 +1,19 @@
-const express = require("express");
+const express = require("express"); // used instead of standard node js
 const app = express();
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv"); // refernces .env file which stores info that will not be uploaded: JWT and passwrds
 const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product");
-const cors = require('cors');
 
-
+const cors = require('cors'); // resolves cross origin issues
 //use cors to help allow for cross-origin reading
 app.use(cors());
 
 
-
-
 dotenv.config();
 
+//mongo db connection
 mongoose.connect(
     process.env.MONGO_URL
 )
@@ -25,30 +23,20 @@ mongoose.connect(
 
 
 
-app.get("/api/test", () =>{
-    console.log("test is successful!");
-})
-
 // To allow for JSON to be used
 app.use(express.json());
 
-//when going to a /user endpoint, this will bring to user.js
+//when this path is added to url, access routes from corresponding file
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
 
+//CORS - accept requests from all urls
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     next();
   });
 
-
-// const corsOptions ={
-//     origin:'http://localhost:3000', 
-//     credentials:true,            //access-control-allow-credentials:true
-//     optionSuccessStatus:200
-// }
-// app.use(cors(corsOptions));
 
 
 

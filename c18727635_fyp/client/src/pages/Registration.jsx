@@ -1,3 +1,4 @@
+
 import React from "react";
 import  styled  from "styled-components";
 import Announcement from "../components/Announcement";
@@ -18,12 +19,14 @@ const Home = () => {
         <div>
             <Root>
                 <Navbar/>
-                <Announcement/>
-                <Categories/>
+
+               
                 <Products/>
                 <Footer/>
                 <Copyright/>
-            </Root>    
+
+            </Root>
+            
         </div>
     )
 }

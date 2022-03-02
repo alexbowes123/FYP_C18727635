@@ -3,6 +3,8 @@ import { Facebook, Instagram } from "@material-ui/icons";
 
 const Container = styled.div`
     display: flex;
+    background-color: #232323;
+
 `
 
 const Left = styled.div`
@@ -12,9 +14,13 @@ const Left = styled.div`
     padding: 20px;
 `
 
-const Logo = styled.h1``
+const Logo = styled.h1`
+    color: white;
+`
 
-const Desc = styled.p``
+const Desc = styled.p`
+    color: white;
+`
 
 const SocialContainer = styled.h1`
     display:flex;
