@@ -1,6 +1,8 @@
 import { Badge } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { FavoriteOutlined, Search, ShoppingCartOutlined } from "@material-ui/icons";
+import { AccountBoxOutlined,FavoriteOutlined, Search, ShoppingCartOutlined } from "@material-ui/icons";
+// import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+
 import React from "react";
 import styled from "styled-components";
 
@@ -85,14 +87,17 @@ const Navbar = () => {
                 </Center>
                 <Right>
                 
-                    <Link to="/register" style={{ textDecoration: 'none' }}> <MenuItem>REGISTER</MenuItem></Link>
-                    <Link to="/login" style={{ textDecoration: 'none' }}><MenuItem>SIGN IN</MenuItem></Link>
+                    {/* <Link to="/register" style={{ textDecoration: 'none' }}> <MenuItem>REGISTER</MenuItem></Link> */}
+                    <Link to="/login" style={{ textDecoration: 'none' }}><MenuItem>
+                        <AccountBoxOutlined/>
+                    </MenuItem></Link>
                    
                     <Link to="/checkout" style={{ textDecoration: 'none' }}><MenuItem>
                         <Badge badgeContent={4} color="primary">
                         <ShoppingCartOutlined/>
                         </Badge>
                     </MenuItem></Link>
+
                     <Link to="/wishlist" style={{ textDecoration: 'none' }}><MenuItem>
                         <Badge badgeContent={1} color="primary">
                         <FavoriteOutlined/>

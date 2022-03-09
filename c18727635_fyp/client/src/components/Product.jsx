@@ -10,7 +10,7 @@ const Container = styled.div`
     display:flex;
     align-items: center;
     justify-content: center;
-    background-color: f2f2f2;
+    background-color: #f2f2f2;
 `
 
 const Circle = styled.div`
