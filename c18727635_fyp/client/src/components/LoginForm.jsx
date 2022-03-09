@@ -1,4 +1,5 @@
 import React,{useState} from "react";
+import axios from "axios";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -45,7 +46,7 @@ const Logo = styled.h1`
   text-align:center;
 `
 
-const userForm = styled.div`
+const UserForm = styled.div`
     flex:1;
     display:block;
     align-items:center;
@@ -53,7 +54,7 @@ const userForm = styled.div`
     background-color: #f2f2f2;
 `
 
-const formItems = styled.div`
+const FormItems = styled.div`
 display: block;
 
 `
@@ -68,19 +69,48 @@ display: block;
 // const LoginForm = () => {
 function LoginForm() {
 
-    const url = ""
+    const url = "http://localhost:5000/api/auth/register";
+    
     const [login, setLogin] = useState({
         email: "",
         password: ""
     })
 
+
+    const [register,setRegister] = useState({
+        email: "",
+        username: "",
+        password: ""
+    })
+
+    function submit(e)
+    {
+       
+        e.preventDefault();
+        axios.post(url,{
+            email: register.email,
+            username: register.username,
+            password: register.password
+
+        }).then(res=>{
+            console.log(res.data);
+        })
+
+    }
+
     // handling login 
-    function handle(e){
+    function handleLogin(e){
         const newLogin ={...login}
         newLogin[e.target.id] = e.target.value
         setLogin(newLogin)
         console.log(newLogin)
-    
+    }
+
+    function handleRegister(e){
+        const newRegister = {...register}
+        newRegister[e.target.id] = e.target.value
+        setRegister(newRegister)
+        console.log(newRegister)
     }
 
     return (
@@ -88,25 +118,25 @@ function LoginForm() {
            <Wrapper>
                 <Left>
                     <Logo>Sign into Blackbelt.</Logo>
-                    <userForm>
+                    <UserForm>
                         {/* LI = LOG IN  */}
-                        <form>
-                            <formItems>
-                            <label for="email"><b>Email:</b></label>
+                        {/* <form on onSubmit={(e)=>submit(e)}> */}
+                           
+                            {/* <label for="email"><b>Email:</b></label>
                             <input type="text" name="email" onChange={(e)=>handle(e)} id="email"  value={login.email} required/>
                             <label for="psw"><b>Password:</b></label>
                             <input type="password" name="psw" onChange={(e)=>handle(e)} id="psw" value={login.password} required/>
-                            <input type="submit" value="Submit" />
-                            </formItems>
-                        </form>
-                    </userForm>
+                            <button>submit</button> */}
+{/*                          
+                        </form> */}
+                    </UserForm>
                     {/* Left */}
                 </Left>
                 <Right>
                 <Logo>Don't have an account? Sign up.</Logo>
-                <userForm>
+                <UserForm>
                     {/* SU = SIGN UP */}
-                        <form>
+                        {/* <form> */}
                             {/* <label for="emailSU"><b>Email:</b></label> */}
                                 {/* <input type="text"  name="emailSU" onchange={(e)=>handle(e)} id="emailSU" value={data.email} required/> */}
                             {/* <label for="nameSU"><b>Name:</b></label>
@@ -116,8 +146,20 @@ function LoginForm() {
                             <label for="psw"><b>Repeat Password:</b></label>
                                 <input type="password" name="psw-repeatSU" id="psw-repeatSU" required/>
                             <input type="submit" value="Submit" /> */}
-                        </form>
-                    </userForm>
+
+                            <form onSubmit={(e)=>submit(e)}>
+                           
+                           <label htmlFor="email"><b>Email:</b></label>
+                           <input type="text" name="email" onChange={(e)=>handleRegister(e)} id="email"  value={register.email} required/>
+                           <label htmlFor="username"><b>Username:</b></label>
+                           <input type="text" name="username" onChange={(e)=>handleRegister(e)} id="username" value={register.username} required/>
+                           <label htmlFor="password"><b>Password:</b></label>
+                           <input type="password" name="password" onChange={(e)=>handleRegister(e)} id="password" value={register.password} required/>
+                           <button>submit</button>
+                        
+                       </form>
+                        {/* </form> */}
+                    </UserForm>
                 </Right>
             </Wrapper>
             
