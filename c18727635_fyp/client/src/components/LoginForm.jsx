@@ -124,6 +124,7 @@ function LoginForm() {
 
         }).then(res=>{
             console.log(res.data);
+
         })
 
     }
