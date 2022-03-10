@@ -22,8 +22,16 @@ router.post("/register", async (req,res)=>{
 //LOGIN SECURELY
 router.post("/login", async (req,res)=>{
     try{
+        //find a user at with the passed email
         const user = await User.findOne({email: req.body.email});
-        !user && res.status(401).json("Wrong user");
+        //if there is not a user
+        // !user && res.status(401).json("Wrong user");
+        if(!user){
+            console.log("no user exists");
+            return res.status(401).json("Wrong user");
+
+        }
+
 
         const hashedPassword = CryptoJS.AES.decrypt(
             user.password,
@@ -31,24 +39,32 @@ router.post("/login", async (req,res)=>{
         );
         const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
         
-        OriginalPassword !== req.body.password && 
-            res.status(401).json("Wrong password");
+        // OriginalPassword !== req.body.password && res.status(401).json("Wrong password");
+        if(OriginalPassword !== req.body.password){
+            console.log("password wrong");
+            return res.status(401).json("Wrong password");
 
-            const accessToken = jwt.sign({
-                id:user._id,
-                isAdmin: user.isAdmin,
-            },
-            process.env.JWT_SEC,
-            {expiresIn:"3d"}
-            );
+        }  
+        
+        //when logging in successfully, make a 3 day token
+        const accessToken = jwt.sign({
+            id:user._id,
+            isAdmin: user.isAdmin,
+        },
+        process.env.JWT_SEC,
+        {expiresIn:"3d"}
+        );
 
         const { password, ...others } = user._doc;
 
         res.status(200).json({...others, accessToken});
+        console.log("user logged in!");
     } catch(err){
+        console.log("potatoes");
         res.status(500).json(err);
     }
 });
 
-
 module.exports = router;
+
+
