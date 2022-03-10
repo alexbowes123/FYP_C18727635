@@ -69,31 +69,30 @@ display: block;
 // const LoginForm = () => {
 function LoginForm() {
 
-    const url = "http://localhost:5000/api/auth/register";
+    //end point for registration
+    const registerUrl = "http://localhost:5000/api/auth/register";
+
+    const loginUrl = "http://localhost:5000/api/auth/login";
     
+
+
     const [login, setLogin] = useState({
         email: "",
         password: ""
     })
 
-
-    const [register,setRegister] = useState({
-        email: "",
-        username: "",
-        password: ""
-    })
-
-    function submit(e)
+    function submitLogin(e)
     {
        
         e.preventDefault();
-        axios.post(url,{
-            email: register.email,
-            username: register.username,
-            password: register.password
+        axios.post(loginUrl,{
+            email: login.email,
+            password: login.password
 
         }).then(res=>{
             console.log(res.data);
+        }).catch(err=>{
+            console.log('Error is',err);
         })
 
     }
@@ -104,6 +103,29 @@ function LoginForm() {
         newLogin[e.target.id] = e.target.value
         setLogin(newLogin)
         console.log(newLogin)
+    }
+
+    //use state for loading values from register inputs into axios for posting to 
+    //db
+    const [register,setRegister] = useState({
+        email: "",
+        username: "",
+        password: ""
+    })
+
+    function submit(e)
+    {
+       
+        e.preventDefault();
+        axios.post(registerUrl,{
+            email: register.email,
+            username: register.username,
+            password: register.password
+
+        }).then(res=>{
+            console.log(res.data);
+        })
+
     }
 
     function handleRegister(e){
@@ -120,17 +142,17 @@ function LoginForm() {
                     <Logo>Sign into Blackbelt.</Logo>
                     <UserForm>
                         {/* LI = LOG IN  */}
-                        {/* <form on onSubmit={(e)=>submit(e)}> */}
+                       <form onSubmit={(e)=>submitLogin(e)}> 
                            
-                            {/* <label for="email"><b>Email:</b></label>
-                            <input type="text" name="email" onChange={(e)=>handle(e)} id="email"  value={login.email} required/>
+                            <label for="email"><b>Email:</b></label>
+                            <input type="text" name="email" onChange={(e)=>handleLogin(e)} id="email"  value={login.email} required/>
                             <label for="psw"><b>Password:</b></label>
-                            <input type="password" name="psw" onChange={(e)=>handle(e)} id="psw" value={login.password} required/>
-                            <button>submit</button> */}
-{/*                          
-                        </form> */}
+                            < input type="password" name="password" onChange={(e)=>handleLogin(e)} id="password" value={login.password} required/>
+                            <button>submit</button> 
+                       
+                        </form>
                     </UserForm>
-                    {/* Left */}
+               
                 </Left>
                 <Right>
                 <Logo>Don't have an account? Sign up.</Logo>
