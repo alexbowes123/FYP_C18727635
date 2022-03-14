@@ -1,4 +1,6 @@
 import React,{useState} from "react";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import styled from "styled-components";
 import Products from "./Products";
@@ -62,6 +64,8 @@ display: block;
 `
 
 
+
+
     
 
 
@@ -70,6 +74,8 @@ display: block;
 
 // const LoginForm = () => {
 function LoginForm() {
+
+    let navigate = useNavigate();
 
     //end point for registration
     const registerUrl = "http://localhost:5000/api/auth/register";
@@ -83,6 +89,8 @@ function LoginForm() {
         password: ""
     })
 
+  
+
     function submitLogin(e)
     {
        
@@ -95,17 +103,14 @@ function LoginForm() {
             console.log('hello response ')
             console.log(res.data);
 
-            // need to get the jwt in this res.data over to  Products.jsx
-            // setUser(res.data);
+           //place the accessToken in a cookie to be passed to requests
             Cookies.set('authorization', res.data.accessToken);
+            //after loggin in, return to home page
+            navigate('../');
 
 
 
-            // setUser(res.data);
-           
-          
-            // after login, trying to get JWT token after login and pass into header for another request
-            // let currToken = res.data.accessToken
+        
         }).catch(err=>{
             console.log('Error is',err);
         })
@@ -140,6 +145,7 @@ function LoginForm() {
 
         }).then(res=>{
             console.log(res.data);
+            navigate('../register');
 
         })
 

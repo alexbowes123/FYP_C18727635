@@ -8,6 +8,8 @@ import Products from "../components/Products";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
+import { useNavigate } from "react-router-dom";
+
 // Added to apply background colour black to edges between components
 const Root = styled.div`
     background-color:#232323;
@@ -15,18 +17,18 @@ const Root = styled.div`
 `
 
 const Home = () => {
+    let navigate = useNavigate();
+
     return(
         <div>
-            <Root>
-                <Navbar/>
+                <h2>thanks for registering successfully!</h2>
 
-               
-                <Products/>
-                <Footer/>
-                <Copyright/>
+                <h3>Click here to return to the login page</h3>
 
-            </Root>
-            
+                <button id ="returnLogin" value = "Return to Login page" onClick={()=>{
+                    navigate('../Login');
+                }}>Return to Login</button> 
+
         </div>
     )
 }
