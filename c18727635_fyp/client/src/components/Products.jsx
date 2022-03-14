@@ -42,9 +42,6 @@ const Products = ({cat,filters,sort}) => {
                     // : "http://localhost:5000/api/products");
                     : "http://localhost:5000/api/products", { headers: {"token" : "Bearer "+Cookies.get('authorization')} });
 
-                    //example of token passed as header
-                    // : "http://localhost:5000/api/products", { headers: {"token" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjllOWEwNDkyOTM0ZDZhNTUzZmY4YiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NDcwODg0NjIsImV4cCI6MTY0NzM0NzY2Mn0.XNYvyd1DXnk7--D5D5Akz-QKhDH50HpMtw-ZiQqOWYc"} });
-                    //pass token in request as header 
 
                 // output products retrieved from db    
                 console.log(res);
@@ -55,6 +52,7 @@ const Products = ({cat,filters,sort}) => {
         
     },[cat]); // Dependency: when the category changes, run the useEffect
 
+    //filtering 
     useEffect(()=>{
         cat && setFilteredProducts(
             products.filter(item=> Object.entries(filters).every(([key,value]) =>
@@ -66,10 +64,9 @@ const Products = ({cat,filters,sort}) => {
     },[products,cat,filters])
 
 
-    //SORT ITEMS ALPHABETICALLY
+    //SORT ITEMS ALPHABETICALLY OR BY PRICE
     useEffect(() =>{
 
-        const parsePrice = x => parseFloat(x.replace(/^\€/, '')) || 0
         if(sort==="asc"){
             setFilteredProducts((prev) => 
                 [...prev].sort((a,b) => a.title.localeCompare(b.title))
@@ -81,12 +78,12 @@ const Products = ({cat,filters,sort}) => {
         }
         else if (sort == "price-asc") {
             setFilteredProducts((prev) =>
-                [...prev].sort((a,b)=> parsePrice(b.price) - parsePrice(a.price))
+                [...prev].sort((a,b)=> a.price - b.price)
             );
         }
         else if (sort == "price-desc") {
             setFilteredProducts((prev) =>
-                [...prev].sort((a,b)=> parsePrice(b.price) - (parsePrice(a.price)))
+                [...prev].sort((a,b)=> b.price - a.price)
             );
         }
     },[sort]);
