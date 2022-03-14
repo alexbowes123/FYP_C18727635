@@ -6,6 +6,16 @@ const { rawListeners } = require("../models/User");
 
 // REGISTRATION
 router.post("/register", async (req,res)=>{
+
+    const regEmail = await User.findOne({email: req.body.email});
+    //check if an account has already been registered with the email
+    if(regEmail){
+        console.log("Email already registered!");
+        return res.status(401).json("Email already registered!");
+
+    }
+
+
     const newUser = new User({
         username: req.body.username,
         email: req.body.email,
@@ -56,6 +66,11 @@ router.post("/login", async (req,res)=>{
         );
 
         const { password, ...others } = user._doc;
+
+
+        console.log("new token being created at login");
+
+        console.log(accessToken);
 
         res.status(200).json({...others, accessToken});
         console.log("user logged in!");

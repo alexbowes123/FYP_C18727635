@@ -1,17 +1,21 @@
 const jwt = require("jsonwebtoken");
 
 const verifyToken = (req, res, next)=>{
-    const authHeader = req.headers.token
+    const authHeader = req.headers.token //token is being sent in the header 
+
+    console.log("authHeader");
+   
 
     if(authHeader){
-            const token = authHeader.split(" ")[1];
+            const token = authHeader.split(" ")[1]; //this token is always the same for some reason?
+            console.log(token);
         jwt.verify(token, process.env.JWT_SEC, (err, user)=>{
-            if(err) res.status(403).json("Token is not valid");
+            if(err) return res.status(403).json("Token is not valid");
             req.user = user;
             next();
         });
     } else {
-        return res.status(401).json("You are not authernticated!");
+        return res.status(401).json("Invalid Token");
     }
 };
 

@@ -1,6 +1,6 @@
 //Use product model
 const Product = require("../models/Product");
-const {verifyTokenAndAdmin} = require("./verifyToken");
+const {verifyTokenAndAdmin, verifyToken} = require("./verifyToken");
 
 const router = require("express").Router();
 
@@ -57,7 +57,9 @@ router.get("/find/:id", async (req, res) => {
 });
 
 // // Get all products
-router.get("/", async (req, res) => {
+router.get("/", verifyToken, async (req, res) => {
+    console.log("user in request is");
+    console.log(req.user);
     const qNew = req.query.new  // get newest 
     const qCategory = req.query.category // get in a certain category
     try {

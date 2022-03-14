@@ -89,6 +89,8 @@ const ProductList = () => {
                         <Option value="newest">Newest</Option>
                         <Option value ="asc">A-Z (ASC)</Option>
                         <Option value = "desc">A-Z (DES)</Option>
+                        <Option value = "price-asc">PRICE (ASC)</Option>
+                        <Option value = "price-desc">PRICE (DES)</Option>
                     </Select>
                 </Filter>
             </FilterContainer>

@@ -5,6 +5,7 @@ const dotenv = require("dotenv"); // refernces .env file which stores info that 
 const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product");
+const cookieParser = require("cookie-parser")
 
 const cors = require('cors'); // resolves cross origin issues
 //use cors to help allow for cross-origin reading
@@ -25,6 +26,10 @@ mongoose.connect(
 
 // To allow for JSON to be used
 app.use(express.json());
+
+
+//cookie parser
+app.use(cookieParser());
 
 //when this path is added to url, access routes from corresponding file
 app.use("/api/users", userRoute);

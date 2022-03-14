@@ -1,6 +1,8 @@
 import React,{useState} from "react";
 import axios from "axios";
 import styled from "styled-components";
+import Products from "./Products";
+import Cookies from "js-cookie";
 
 const Container = styled.div`
     height: 60px; 
@@ -74,7 +76,7 @@ function LoginForm() {
 
     const loginUrl = "http://localhost:5000/api/auth/login";
     
-
+    const [user, setUser] = useState(null);
 
     const [login, setLogin] = useState({
         email: "",
@@ -90,7 +92,20 @@ function LoginForm() {
             password: login.password
 
         }).then(res=>{
+            console.log('hello response ')
             console.log(res.data);
+
+            // need to get the jwt in this res.data over to  Products.jsx
+            // setUser(res.data);
+            Cookies.set('authorization', res.data.accessToken);
+
+
+
+            // setUser(res.data);
+           
+          
+            // after login, trying to get JWT token after login and pass into header for another request
+            // let currToken = res.data.accessToken
         }).catch(err=>{
             console.log('Error is',err);
         })
@@ -102,7 +117,8 @@ function LoginForm() {
         const newLogin ={...login}
         newLogin[e.target.id] = e.target.value
         setLogin(newLogin)
-        console.log(newLogin)
+        // console.log(newLogin)
+        
     }
 
     //use state for loading values from register inputs into axios for posting to 
@@ -142,7 +158,7 @@ function LoginForm() {
                 <Left>
                     <Logo>Sign into Blackbelt.</Logo>
                     <UserForm>
-                        {/* LI = LOG IN  */}
+                       
                        <form onSubmit={(e)=>submitLogin(e)}> 
                            
                             <label for="email"><b>Email:</b></label>
