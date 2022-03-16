@@ -5,6 +5,7 @@ import Product from "./Product";
 import user from "./LoginForm";
 import Cookies from "js-cookie";
 
+
 //import axios to get products from the db
 import axios from "axios";
 import LoginForm from "./LoginForm";
@@ -28,15 +29,18 @@ const Products = ({cat,filters,sort}) => {
     //when filters are updated, update the products    
     const [filteredProducts,setFilteredProducts] = useState([]);
 
+    const axiosNew = axios.create();
+
+ 
+
 
     useEffect(()=>{
 
         // FUNCTION TO GET PRODUCTS
         const getProducts = async () =>{
             try{
-                // if there is a category parameter, fetch by category, else
-                // get all products
-                const res = await axios.get(
+                //run the axios.interceptor to genereate the token before this request
+                const res = await axiosNew.get(
                     cat
                     ? `http://localhost:5000/api/products?category=${cat}` 
                     // : "http://localhost:5000/api/products");
