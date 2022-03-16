@@ -73,7 +73,7 @@ router.post("/refresh", async (req,res)=>{
         });
     });
 
-    //if all is ok, create a new access token, refresh token and send to user
+  
 })
 
 
@@ -84,7 +84,7 @@ const generateAccessToken =(user)=>{
         isAdmin: user.isAdmin,
     },
     process.env.JWT_SEC,
-    {expiresIn:"40s"}
+    {expiresIn:"15s"}
     );
 } 
 

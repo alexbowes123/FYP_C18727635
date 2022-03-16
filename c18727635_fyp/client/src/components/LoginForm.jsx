@@ -5,7 +5,8 @@ import axios from "axios";
 import styled from "styled-components";
 import Products from "./Products";
 import Cookies from "js-cookie";
-import jwt_decode from "jwt-decode";
+
+
 
 const Container = styled.div`
     height: 60px; 
@@ -123,71 +124,13 @@ function LoginForm() {
    
     // remove above and uncomment this for original version
 
-    const refreshToken = async () => {
-        try{
-            console.log("in refreshToken func");
-            console.log("before passing refresh, refresh is:");
-            console.log(Cookies.get('refresh'));
-
-            //refresh cookie is reaching here
-            //the 403 is due to an invalid token being passed here
-
-            
-            const res = await axios.post(refreshUrl, {token: Cookies.get('refresh')});
-            
-            //this has empty data for access and refresh?
-            setUser({
-                ...user,
-                accessToken: res.data.accessToken,
-                refreshToken: res.data.refreshToken,
-            });
-            //not reaching here some times so it is an issue with the post itself?
-            console.log("user is");
-            console.log(user);
-            return res.data;
-        } catch (err){
-            console.log(err);
-        }
-    }
+   
 
 
 
  
     
-    const axiosJWT = axios.create(); 
-
-
-    axiosJWT.interceptors.request.use(async (config)=>{
-    //     //before making a request
-        console.log("in axios.interceptors")
-        let currentDate = new Date();
-        if(!Cookies.get('authorization')){
-            console.log("no access token")
-            return;
-        }
-        
-        //check if this already exists
-        const decodedToken = jwt_decode(Cookies.get('authorization'));
-        console.log("decode expiry is:")
-        console.log(decodedToken.exp);
-
-
-        //if the token has expired
-        if(decodedToken.exp * 1000 < currentDate.getTime()){
-            console.log("refreshing token!")
-            const data = await refreshToken();
-            console.log(" refresh token data is");
-            console.log(data); //this is undefined currently
-            // config.headers["authorization"] = "Bearer " + data.accessToken;
-            Cookies.set('authorization', data.accessToken);
-            Cookies.set('refresh', data.refreshToken);
-        }
-        return config;
-    },(error)=>{
-
-        return Promise.reject(error);
-    });
-
+    
     // console.log(jwt_decode(Cookies.get('authorization')));
     
 
@@ -247,7 +190,7 @@ function LoginForm() {
     {
        
         e.preventDefault();
-        axiosJWT.post(registerUrl,{
+        axios.post(registerUrl,{
             email: register.email,
             username: register.username,
             password: register.password

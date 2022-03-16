@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 
 //import axios to get products from the db
 import axios from "axios";
+import { axiosJWT } from "../refresh"
 import LoginForm from "./LoginForm";
 
 const Container = styled.div`
@@ -28,19 +29,17 @@ const Products = ({cat,filters,sort}) => {
 
     //when filters are updated, update the products    
     const [filteredProducts,setFilteredProducts] = useState([]);
-
-    const axiosNew = axios.create();
-
  
 
-
     useEffect(()=>{
+
+        console.log("token is" + Cookies.get('authorization'));
 
         // FUNCTION TO GET PRODUCTS
         const getProducts = async () =>{
             try{
                 //run the axios.interceptor to genereate the token before this request
-                const res = await axiosNew.get(
+                const res = await axiosJWT.get(
                     cat
                     ? `http://localhost:5000/api/products?category=${cat}` 
                     // : "http://localhost:5000/api/products");
