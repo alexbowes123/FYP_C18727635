@@ -12,12 +12,21 @@ import {
   Link
 } from "react-router-dom";
 
+import {useState} from "react";
+import { UserContext } from "./userContext";
 
 const App = () => {
+
+    const [user, setUser] = useState({
+        accessToken: "",
+        refreshToken: ""
+    })
+    
     return (
 
         // Using react router dom
         <Router>
+            <UserContext.Provider value = {{user,setUser}}>
             <Routes>
             <Route exact path='/' element={<Home/>} />
             <Route exact path='/login' element={<Login/>} />
@@ -28,9 +37,8 @@ const App = () => {
 
             {/* search for an individual product */}
             {/* <Route path='/product/:id' element={<Product/>} /> */}
-              
-         
             </Routes>
+            </UserContext.Provider>
         </Router>
     );
 };

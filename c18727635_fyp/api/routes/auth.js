@@ -54,11 +54,10 @@ router.post("/refresh", async (req,res)=>{
         err && console.log(err);
         refreshTokens =refreshTokens.filter((token)=> token !== refreshToken);
         
-        
-        console.log("about to generate new access and refresh");
+    
         const newAccessToken = generateAccessToken(user); //is user reaching here?
         const newRefreshToken = generateRefreshToken(user);
-        console.log("refresh generation and array push!")
+      
         console.log("new access token with user passed is")
         console.log(newAccessToken);
         console.log("new refresh with user passed is");

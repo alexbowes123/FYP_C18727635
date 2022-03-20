@@ -58,7 +58,7 @@ export  const refreshToken = async () => {
         //this has empty data for access and refresh?
      
         //not reaching here some times so it is an issue with the post itself?
-        console.log("user is");
+     
     
         return res.data;
     } catch (err){

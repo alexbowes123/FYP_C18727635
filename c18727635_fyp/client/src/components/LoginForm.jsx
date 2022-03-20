@@ -1,10 +1,11 @@
-import React,{useState} from "react";
+import React,{useContext, useState} from "react";
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import styled from "styled-components";
 import Products from "./Products";
 import Cookies from "js-cookie";
+import { UserContext } from "../userContext";
 
 
 
@@ -50,6 +51,13 @@ const Logo = styled.h1`
   font-weight:bolder;
   color: #232323;
   text-align:center;
+`
+
+const Message = styled.h3`
+font-weight:bolder;
+color: #232323;
+text-align:center;
+
 `
 
 const UserForm = styled.div`
@@ -113,10 +121,12 @@ function LoginForm() {
 
     const loginUrl = "http://localhost:5000/api/auth/login";
 
-    const [user, setUser] = useState({
-        accessToken: "",
-        refreshToken: ""
-    })
+    const {user,setUser} = useContext(UserContext);
+
+    // const [user, setUser] = useState({
+    //     accessToken: "",
+    //     refreshToken: ""
+    // })
 
     // refreshToken(setUser)
 
@@ -210,11 +220,16 @@ function LoginForm() {
         console.log(newRegister)
     }
 
+
+    
     return (
         <Container>
            <Wrapper>
                 <Left>
+                
                     <Logo>Sign into Blackbelt.</Logo>
+                    {/* <Message>{user}</Message> */}
+                   
                     <UserForm>
                        
                        <form onSubmit={(e)=>submitLogin(e)}> 

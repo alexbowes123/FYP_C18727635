@@ -1,10 +1,12 @@
 import { Badge } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { UserContext } from "../userContext";
 import { AccountBoxOutlined,FavoriteOutlined, Search, ShoppingCartOutlined } from "@material-ui/icons";
 // import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 import React from "react";
 import styled from "styled-components";
+import { useContext } from "react";
 
 const Container = styled.div`
     height: 60px; 
@@ -54,6 +56,11 @@ const Logo = styled.h1`
   font-weight:bolder;
   color: white;
 `
+
+const Message = styled.h3`
+
+    color:white;
+`
 const Right = styled.div`
     flex:1;
     display:flex;
@@ -71,6 +78,8 @@ const MenuItem = styled.div`
 
 const Navbar = () => {
 
+    const {user,setUser} = useContext(UserContext);
+
     return (
         <Container>
             <Wrapper>
@@ -86,6 +95,9 @@ const Navbar = () => {
                 <Link to="/" style={{ textDecoration: 'none' }}><Logo>Blackbelt.</Logo></Link>
                 </Center>
                 <Right>
+                   
+                {/* Display a user's username */}
+                <Message>{user.username}</Message>
                 
                     {/* <Link to="/register" style={{ textDecoration: 'none' }}> <MenuItem>REGISTER</MenuItem></Link> */}
                     <Link to="/login" style={{ textDecoration: 'none' }}><MenuItem>
