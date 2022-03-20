@@ -11,6 +11,8 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { axiosJWT } from "../refresh"
 
+import { useNavigate } from "react-router-dom";
+
 const logoutURL = "http://localhost:5000/api/auth/logout"
 
 const Container = styled.div`
@@ -96,6 +98,8 @@ const Navbar = () => {
 
     const {user,setUser} = useContext(UserContext);
 
+    let navigate = useNavigate()
+
  
 
     function handleLogout(e){
@@ -109,6 +113,8 @@ const Navbar = () => {
 
             //the username disappears when the token is refreshed or the dom re renders
             console.log("user is",user);
+            //placeholder visit register after logging out
+            navigate('../register');
 
         }).catch(err=>{
             console.log('Error is',err);
