@@ -1,4 +1,4 @@
-import { Badge } from "@material-ui/core";
+import { Badge, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { UserContext } from "../userContext";
 import { AccountBoxOutlined,FavoriteOutlined, Search, ShoppingCartOutlined } from "@material-ui/icons";
@@ -7,6 +7,11 @@ import { AccountBoxOutlined,FavoriteOutlined, Search, ShoppingCartOutlined } fro
 import React from "react";
 import styled from "styled-components";
 import { useContext } from "react";
+import Cookies from "js-cookie";
+import axios from "axios";
+import { axiosJWT } from "../refresh"
+
+const logoutURL = "http://localhost:5000/api/auth/logout"
 
 const Container = styled.div`
     height: 60px; 
@@ -75,10 +80,40 @@ const MenuItem = styled.div`
     color: white;
 `
 
+const headers = {
+    'token': "Bearer "+Cookies.get('authorization'),
+    'Content-Type': 'application/json'
+}
+
+const data = {
+    "token": Cookies.get('refresh')
+}
+
+
+
 
 const Navbar = () => {
 
     const {user,setUser} = useContext(UserContext);
+
+ 
+
+    function handleLogout(e){
+        e.preventDefault();
+
+        axiosJWT.post(logoutURL, data, {
+            headers: headers
+        }).then((response)=>{
+            console.log(response);
+            user.username = null; //set user.username to null so the user's name and logout button will disappear
+
+            //the username disappears when the token is refreshed or the dom re renders
+            console.log("user is",user);
+
+        }).catch(err=>{
+            console.log('Error is',err);
+        })
+    }
 
     return (
         <Container>
@@ -96,8 +131,10 @@ const Navbar = () => {
                 </Center>
                 <Right>
                    
-                {/* Display a user's username */}
-                <Message>{user.username}</Message>
+                    {/* Display a user's username */}
+                    {user.username != null ? <Message>{user.username}</Message>: <Message>Not logged in</Message> }   
+                    {user.username != null ? <button onClick={handleLogout}>LOGOUT</button>: null }  
+
                 
                     {/* <Link to="/register" style={{ textDecoration: 'none' }}> <MenuItem>REGISTER</MenuItem></Link> */}
                     <Link to="/login" style={{ textDecoration: 'none' }}><MenuItem>
