@@ -10,7 +10,7 @@ import LoginForm from "../components/LoginForm";
 // Added to apply background colour black to edges between components
 
 
-const Home = () => {
+const Login = () => {
     return(
         <div>
             
@@ -25,4 +25,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Login

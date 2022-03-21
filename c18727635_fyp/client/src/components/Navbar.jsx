@@ -114,7 +114,7 @@ const Navbar = () => {
             //the username disappears when the token is refreshed or the dom re renders
             console.log("user is",user);
             //placeholder visit register after logging out
-            navigate('../register');
+            navigate('../logout');
 
         }).catch(err=>{
             console.log('Error is',err);

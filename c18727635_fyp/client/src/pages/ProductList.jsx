@@ -15,6 +15,7 @@ const Container = styled.div`
 `
 const Title = styled.h1`
     margin: 20px;
+    text-transform: capitalize;
 `
 const FilterContainer = styled.div`
     display: flex;
@@ -58,7 +59,7 @@ const ProductList = () => {
         <Container>
             <Navbar/>
             <Announcement/>
-            <Title>Boxing</Title>
+            {cat != "bjj" ?   <Title>{cat}</Title>: <Title>Brazilian Jiu Jitsu</Title> }  
             <FilterContainer>
                 <Filter>
                     <FilterText>Filter Products:</FilterText>

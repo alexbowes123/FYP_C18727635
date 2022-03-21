@@ -10,7 +10,7 @@ const Container = styled.div`
     display:flex;
     align-items: center;
     justify-content: center;
-    background-color: #f2f2f2;
+    background-color: white;
 `
 
 const Circle = styled.div`
@@ -29,7 +29,9 @@ const Info = styled.div`
 `
 
 const Icon = styled.div`
-
+    padding-top: 3px;
+    background-color:white;
+   
 `
 
 const Title = styled.div`
@@ -38,7 +40,16 @@ const Title = styled.div`
 const Price = styled.div`
 
 `
+
 const Product = ({item}) => {
+
+    function addToCart(){
+        alert("clicking cart add!");
+    }
+
+    function addToWishlist(){
+        alert("clicking wishlist add!")
+    }
     return (
         <Container>
             <Circle/>
@@ -50,12 +61,19 @@ const Product = ({item}) => {
                 <Price>
                     <h4>€{item.price}</h4>
                 </Price>
+                    
                 <Icon>
-                    <ShoppingCartOutlined/>
+                    <button style={{border:"none", cursor:"pointer", backgroundColor:"white"}} onClick={addToCart}>      
+                        <ShoppingCartOutlined/>
+                    </button>
                 </Icon>
+    
                 <Icon>
+                    <button style={{border:"none", cursor:"pointer", backgroundColor:"white"}} onClick={addToWishlist}> 
                     <FavoriteOutlined/>
+                    </button>
                 </Icon>
+               
             </Info>
         </Container>
     )
