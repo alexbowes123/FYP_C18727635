@@ -9,19 +9,17 @@ import LoginForm from "../components/LoginForm";
 
 // Added to apply background colour black to edges between components
 
+const Container = styled.div`
+`
 
 const Login = () => {
     return(
-        <div>
-            
+            <Container>
                 <Navbar/>
                 <LoginForm/>
-                {/* <Footer/>
-                <Copyright/> */}
-
-           
-            
-        </div>
+                <Footer/>
+                <Copyright/>
+            </Container>
     )
 }
 

@@ -5,6 +5,8 @@ import Announcement from "../components/Announcement";
 import { useContext } from "react";
 import { UserContext } from "../userContext";
 import BasketHeader from "../components/BasketHeader";
+import Footer from "../components/Footer";
+import Copyright from "../components/Copyright";
 
 const Container = styled.div`
 `
@@ -28,10 +30,10 @@ const Checkout = () => {
         <Container>
             <Navbar/>
             <Announcement/>
-            <Message>Welcome to the checkout page <b>{user.username}</b></Message>
+            <Message>Welcome to the Checkout page, <i>{user.username}</i></Message>
             <BasketHeader/>
-
-
+            <Footer/>
+            <Copyright/>
         </Container>
     )
 

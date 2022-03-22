@@ -9,10 +9,10 @@ import { UserContext } from "../userContext";
 
 
 
-const Container = styled.div`
-    height: 60px; 
-    background-color: #232323;
-`
+// const Container = styled.div`
+//     height: 60px; 
+//     background-color: #232323;
+// `
 
 const Wrapper = styled.div`
     padding: 0px 20px;
@@ -30,7 +30,7 @@ const Left = styled.div`
     align-items:center;
     background-color: #f2f2f2;
     padding-right: 10px;
-    border: 2px solid orange;
+    // border: 2px solid orange;
     margin-right: 10%;
     height: 500px;
 
@@ -41,7 +41,7 @@ const Right = styled.div`
     flex:1;
     display:block;
     background-color: #f2f2f2;
-    border: 2px solid red;
+    // border: 2px solid red;
     height: 500px;
 `
 
@@ -223,7 +223,7 @@ function LoginForm() {
 
     
     return (
-        <Container>
+       
            <Wrapper>
                 <Left>
                 
@@ -275,7 +275,7 @@ function LoginForm() {
                 </Right>
             </Wrapper>
             
-        </Container>
+     
     )
 }
 
