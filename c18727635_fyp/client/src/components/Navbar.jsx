@@ -139,7 +139,7 @@ const Navbar = () => {
                    
                     {/* Display a user's username */}
                     {user.username != null ? <Message>{user.username}</Message>: <Message>Not logged in</Message> }   
-                    {user.username != null ? <button onClick={handleLogout}>LOGOUT</button>: null }  
+                    {user.username != null ? <button onClick={handleLogout} style ={{marginLeft:30}}>LOGOUT</button>: null }  
 
                 
                     {/* <Link to="/register" style={{ textDecoration: 'none' }}> <MenuItem>REGISTER</MenuItem></Link> */}
