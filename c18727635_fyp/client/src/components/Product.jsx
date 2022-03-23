@@ -43,12 +43,19 @@ const Price = styled.div`
 
 const Product = ({item}) => {
 
-    function addToCart(){
-        alert("clicking cart add!");
+    function addToCart(item){
+        // e.preventDefault();
+
+        //get the item that was clicked
+        console.log("clicking cart!: "+item.title);
+        console.log("item id is"+item._id);
+
+        //trigger an api call to create or update a cart for the user
+        
     }
 
-    function addToWishlist(){
-        alert("clicking wishlist add!")
+    function addToWishlist(item){
+        console.log("clicking wishlist!: "+item.title);
     }
     return (
         <Container>
@@ -63,13 +70,13 @@ const Product = ({item}) => {
                 </Price>
                     
                 <Icon>
-                    <button style={{border:"none", cursor:"pointer", backgroundColor:"white"}} onClick={addToCart}>      
+                    <button style={{border:"none", cursor:"pointer", backgroundColor:"white"}} onClick={()=>{addToCart(item)}}>      
                         <ShoppingCartOutlined/>
                     </button>
                 </Icon>
     
                 <Icon>
-                    <button style={{border:"none", cursor:"pointer", backgroundColor:"white"}} onClick={addToWishlist}> 
+                    <button style={{border:"none", cursor:"pointer", backgroundColor:"white"}} onClick={()=>{addToWishlist(item)}}> 
                     <FavoriteOutlined/>
                     </button>
                 </Icon>

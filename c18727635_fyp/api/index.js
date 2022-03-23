@@ -5,7 +5,8 @@ const dotenv = require("dotenv"); // refernces .env file which stores info that 
 const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product");
-const cookieParser = require("cookie-parser")
+const cartRoute = require("./routes/cart");
+const cookieParser = require("cookie-parser");
 
 const cors = require('cors'); // resolves cross origin issues
 //use cors to help allow for cross-origin reading
@@ -35,13 +36,13 @@ app.use(cookieParser());
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
+app.use("/api/cart", cartRoute);
 
 //CORS - accept requests from all urls
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     next();
   });
-
 
 
 
