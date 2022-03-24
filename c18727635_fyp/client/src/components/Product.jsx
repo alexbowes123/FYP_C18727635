@@ -1,4 +1,8 @@
 import styled from "styled-components"
+import { UserContext } from "../userContext";
+import { useContext } from "react";
+import axios from "axios";
+import { axiosJWT } from "../refresh"
 
 import { FavoriteOutlined, ShoppingCartOutlined } from "@material-ui/icons";
 
@@ -42,21 +46,37 @@ const Price = styled.div`
 `
 
 const Product = ({item}) => {
+    
+    const {user,setUser} = useContext(UserContext);
 
-    function addToCart(item){
-        // e.preventDefault();
+    const addToCart = async(item) => {
+             
+        //update a cart based on the current user's id
 
-        //get the item that was clicked
-        console.log("clicking cart!: "+item.title);
-        console.log("item id is"+item._id);
-
-        //trigger an api call to create or update a cart for the user
-        
+        try{
+            const res = await axiosJWT.put(
+                `http://localhost:5000/api/cart/find/${user._id}`,{
+                products: [
+                    {
+                        productId:item._id,
+                        quantity: 1
+                      
+                    },
+                ] 
+            }).then(res=>{
+                console.log('cart updated ')
+                console.log(res.data);
+    
+            }).catch(err=>{
+                console.log('Error is',err);
+            })     
+        }catch(error){}    
     }
 
     function addToWishlist(item){
         console.log("clicking wishlist!: "+item.title);
     }
+
     return (
         <Container>
             <Circle/>

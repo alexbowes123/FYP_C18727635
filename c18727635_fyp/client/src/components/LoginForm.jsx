@@ -76,73 +76,16 @@ display: block;
 const refreshUrl = "http://localhost:5000/api/auth/refresh";
 
     
-
-// const refreshToken = async (setUser) => {
-//     try{
-//         console.log("in refreshToken func");
-//         console.log("before passing refresh, refresh is:");
-//         console.log(Cookies.get('refresh'));
-
-//         //refresh cookie is reaching here
-//         //the 403 is due to an invalid token being passed here
-
-//         //an old token is being passed which is causing 403, which means the res.data is not updated
-//         const res = await axios.post(refreshUrl, {token: Cookies.get('refresh')});
-//         setUser({
-//             ...user,
-//             accessToken: res.data.accessToken,
-//             refreshToken: res.data.refreshToken,
-//         });
-//         //not reaching here some times so it is an issue with the post itself?
-//         console.log("user is");
-//         console.log(user);
-//         return res.data;
-//     } catch (err){
-//         console.log(err);
-//     }
-// }
-
-
-
-
-    
-
-
-
-
-
-// const LoginForm = () => {
 function LoginForm() {
 
     let navigate = useNavigate();
 
-    //end point for registration
     const registerUrl = "http://localhost:5000/api/auth/register";
-
     const loginUrl = "http://localhost:5000/api/auth/login";
+    const cartUrl = "http://localhost:5000/api/cart"
 
     const {user,setUser} = useContext(UserContext);
 
-    // const [user, setUser] = useState({
-    //     accessToken: "",
-    //     refreshToken: ""
-    // })
-
-    // refreshToken(setUser)
-
-    
-   
-    // remove above and uncomment this for original version
-
-   
-
-
-
- 
-    
-    
-    // console.log(jwt_decode(Cookies.get('authorization')));
-    
 
     const [login, setLogin] = useState({
         email: "",
@@ -150,7 +93,6 @@ function LoginForm() {
     })
 
   
-
     function submitLogin(e)
     {
        
@@ -171,7 +113,6 @@ function LoginForm() {
             navigate('../');
 
 
-
         
         }).catch(err=>{
             console.log('Error is',err);
@@ -179,13 +120,10 @@ function LoginForm() {
 
     }
 
-    // handling login 
     function handleLogin(e){
         const newLogin ={...login}
         newLogin[e.target.id] = e.target.value
         setLogin(newLogin)
-        // console.log(newLogin)
-        
     }
 
     //use state for loading values from register inputs into axios for posting to 
@@ -200,24 +138,38 @@ function LoginForm() {
     {
        
         e.preventDefault();
+
+        // create a user 
         axios.post(registerUrl,{
             email: register.email,
             username: register.username,
             password: register.password
 
         }).then(res=>{
+
+            //CREATE A CART FOR THE NEW USER
+            axios.post(cartUrl,{
+            userId: res.data._id,
+            products: [
+             
+            ]
+
+        }).then(res=>{
+            console.log('hello cart ')
             console.log(res.data);
-            navigate('../register');
-
+             navigate('../register');
+            
+        }).catch(err=>{
+            console.log('Error is',err);
         })
-
+                
+        })
     }
 
     function handleRegister(e){
         const newRegister = {...register}
         newRegister[e.target.id] = e.target.value
         setRegister(newRegister)
-        console.log(newRegister)
     }
 
 
@@ -226,41 +178,21 @@ function LoginForm() {
        
            <Wrapper>
                 <Left>
-                
                     <Logo>Sign into Blackbelt.</Logo>
-                    {/* <Message>{user}</Message> */}
-                   
-                    <UserForm>
-                       
-                       <form onSubmit={(e)=>submitLogin(e)}> 
-                           
+                    <UserForm>  
+                       <form onSubmit={(e)=>submitLogin(e)}>  
                             <label for="email"><b>Email:</b></label>
                             <input type="text" name="email" onChange={(e)=>handleLogin(e)} id="email"  value={login.email} required/>
                             <label for="psw"><b>Password:</b></label>
                             < input type="password" name="password" onChange={(e)=>handleLogin(e)} id="password" value={login.password} required/>
-                            <button>submit</button> 
-                       
+                            <button>submit</button>  
                         </form>
                     </UserForm>
-               
                 </Left>
                 <Right>
                 <Logo>Don't have an account? Sign up.</Logo>
                 <UserForm>
-                    {/* SU = SIGN UP */}
-                        {/* <form> */}
-                            {/* <label for="emailSU"><b>Email:</b></label> */}
-                                {/* <input type="text"  name="emailSU" onchange={(e)=>handle(e)} id="emailSU" value={data.email} required/> */}
-                            {/* <label for="nameSU"><b>Name:</b></label>
-                                <input type="text" onChange={(e)=>handle(e)}  name="nameSU" value={data.name} id="nameSU" required/>
-                            <label for="psw"><b>Password:</b></label>
-                                <input type="password"  onChange={(e)=>handle(e)} name="pswSU" value={data.name} id="pswSU" required/>
-                            <label for="psw"><b>Repeat Password:</b></label>
-                                <input type="password" name="psw-repeatSU" id="psw-repeatSU" required/>
-                            <input type="submit" value="Submit" /> */}
-
-                            <form onSubmit={(e)=>submit(e)}>
-                           
+                        <form onSubmit={(e)=>submit(e)}> 
                            <label htmlFor="email"><b>Email:</b></label>
                            <input type="text" name="email" onChange={(e)=>handleRegister(e)} id="email"  value={register.email} required/>
                            <label htmlFor="username"><b>Username:</b></label>
@@ -268,9 +200,7 @@ function LoginForm() {
                            <label htmlFor="password"><b>Password:</b></label>
                            <input type="password" name="password" onChange={(e)=>handleRegister(e)} id="password" value={register.password} required/>
                            <button>submit</button>
-                        
                        </form>
-                        {/* </form> */}
                     </UserForm>
                 </Right>
             </Wrapper>
