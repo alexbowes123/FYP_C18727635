@@ -1,12 +1,12 @@
 import { Badge, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { UserContext } from "../userContext";
+import { CartContext, UserContext } from "../userContext";
 import { AccountBoxOutlined,FavoriteOutlined, Search, ShoppingCartOutlined } from "@material-ui/icons";
 // import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 import React from "react";
 import styled from "styled-components";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { axiosJWT } from "../refresh"
@@ -98,9 +98,16 @@ const Navbar = () => {
 
     const {user,setUser} = useContext(UserContext);
 
+    const {userCart,setUserCart} = useContext(CartContext);
+
     let navigate = useNavigate()
 
- 
+    useEffect(()=>{
+        console.log("userCart is", userCart);
+    },[userCart])
+
+    
+   
 
     function handleLogout(e){
         e.preventDefault();
@@ -110,6 +117,7 @@ const Navbar = () => {
         }).then((response)=>{
             console.log(response);
             user.username = null; //set user.username to null so the user's name and logout button will disappear
+            setUserCart(null); //empty cart context after logout
 
             //the username disappears when the token is refreshed or the dom re renders
             console.log("user is",user);
@@ -148,9 +156,7 @@ const Navbar = () => {
                     </MenuItem></Link>
                    
                     <Link to="/checkout" style={{ textDecoration: 'none' }}><MenuItem>
-                        <Badge badgeContent={4} color="primary">
-                        <ShoppingCartOutlined/>
-                        </Badge>
+                    {userCart != null? <Badge badgeContent = {userCart.products.length} color="primary"> <ShoppingCartOutlined/></Badge> : <Badge color="primary"> <ShoppingCartOutlined/></Badge> } 
                     </MenuItem></Link>
 
                     <Link to="/wishlist" style={{ textDecoration: 'none' }}><MenuItem>

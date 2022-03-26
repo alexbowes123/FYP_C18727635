@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import { UserContext } from "../userContext";
-import { useContext } from "react";
+import { UserContext, CartContext } from "../userContext";
+import { useContext, useEffect } from "react";
 import axios from "axios";
 import { axiosJWT } from "../refresh"
 
@@ -49,6 +49,13 @@ const Product = ({item}) => {
     
     const {user,setUser} = useContext(UserContext);
 
+    const {userCart,setUserCart} = useContext(CartContext);
+
+    useEffect(()=>{
+        // console.log("updated Cart is", userCart);
+    },[userCart])
+
+
     const addToCart = async(item) => {
              
         //update a cart based on the current user's id
@@ -66,6 +73,7 @@ const Product = ({item}) => {
             }).then(res=>{
                 console.log('cart updated ')
                 console.log(res.data);
+                setUserCart(res.data); //update cart context 
     
             }).catch(err=>{
                 console.log('Error is',err);

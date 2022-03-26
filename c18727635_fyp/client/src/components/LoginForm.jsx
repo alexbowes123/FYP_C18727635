@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import styled from "styled-components";
-import Products from "./Products";
 import Cookies from "js-cookie";
-import { UserContext } from "../userContext";
+import { UserContext, CartContext } from "../userContext";
 
 
 
@@ -86,14 +85,30 @@ function LoginForm() {
 
     const {user,setUser} = useContext(UserContext);
 
+    const {userCart,setUserCart} = useContext(CartContext);
+
+
 
     const [login, setLogin] = useState({
         email: "",
         password: ""
     })
 
+    const getUserCart = async(userData) => {
+        try{
+
+            //get cart from db based on userid 
+            const getCart = await axios.get(`http://localhost:5000/api/cart/find/${userData._id}`)
+
+            return getCart.data;
+
+        }catch(err){
+            console.log(err);
+        }
+    }
+
   
-    function submitLogin(e)
+    const submitLogin = async(e) =>
     {
        
         e.preventDefault();
@@ -101,20 +116,25 @@ function LoginForm() {
             email: login.email,
             password: login.password
 
-        }).then(res=>{
+        }).then(async (res) => {
             console.log('hello response ')
             console.log(res.data);
             setUser(res.data);
-
-           //place the accessToken in a cookie to be passed to requests
+            
+            //place the accessToken in a cookie to be passed to requests
             Cookies.set('authorization', res.data.accessToken);
             Cookies.set('refresh',res.data.refreshToken);
-            //after loggin in, return to home page
-            navigate('../');
 
+            //GET THE LOGGED IN USER'S CART 
+     
+            const cartData = await getUserCart(res.data);
 
-        
-        }).catch(err=>{
+            setUserCart({...cartData}); //spread operator an object
+
+            navigate('../'); 
+
+        })
+        .catch(err=>{
             console.log('Error is',err);
         })
 
@@ -181,9 +201,9 @@ function LoginForm() {
                     <Logo>Sign into Blackbelt.</Logo>
                     <UserForm>  
                        <form onSubmit={(e)=>submitLogin(e)}>  
-                            <label for="email"><b>Email:</b></label>
+                            <label htmlFor="email"><b>Email:</b></label>
                             <input type="text" name="email" onChange={(e)=>handleLogin(e)} id="email"  value={login.email} required/>
-                            <label for="psw"><b>Password:</b></label>
+                            <label htmlFor="psw"><b>Password:</b></label>
                             < input type="password" name="password" onChange={(e)=>handleLogin(e)} id="password" value={login.password} required/>
                             <button>submit</button>  
                         </form>
