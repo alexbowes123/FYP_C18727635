@@ -1,9 +1,10 @@
 import { UserContext } from "../userContext";
-import React from "react";
+import { React , useState, useEffect} from "react";
 import styled from "styled-components";
 import { useContext } from "react";
 import Cookies from "js-cookie";
-
+import axios from "axios";
+import CartItem from "./CartItem";
 
 
 
@@ -115,6 +116,35 @@ const data = {
 const BasketHeader = () => {
 
     const {user,setUser} = useContext(UserContext);
+
+    const [cart,setCart] = useState([]);
+    
+    function getCartNow()  {
+        console.log("cart is a",cart);
+    }
+ 
+
+    useEffect(()=>{
+
+    
+        // FUNCTION TO GET PRODUCTS
+        const getCart = async () =>{
+            try{
+            
+                const res = await axios.get(`http://localhost:5000/api/cart/find/${user._id}`);
+
+
+                // output products retrieved from db    
+                console.log("cart Retrieved is",res.data);
+                setCart(res.data.products);
+
+           
+            } catch(error){}
+        };
+        getCart();
+        
+    },[]); // Dependency: when the category changes, run the useEffect
+
  
     return (
         <Container>
@@ -122,6 +152,9 @@ const BasketHeader = () => {
                 <Wrapper>
                     <Left>
                         <Details>Order Details</Details>
+                        {cart.map(item=>(
+                <CartItem item={item} key = {item.id}/>
+            ))}
                     </Left>
                     <Center>
                         <Details>Quantity</Details>
@@ -129,6 +162,7 @@ const BasketHeader = () => {
                     <Right>
                         <PriceDetails>Price</PriceDetails>
                         <TotalDetails>Total</TotalDetails>
+                        <button onClick={getCartNow()}>Get cart</button>
                     </Right>
                 </Wrapper>
             </Banner>
