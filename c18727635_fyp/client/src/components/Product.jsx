@@ -59,26 +59,31 @@ const Product = ({item}) => {
     const addToCart = async(item) => {
              
         //update a cart based on the current user's id
-
-        try{
-            const res = await axiosJWT.put(
-                `http://localhost:5000/api/cart/find/${user._id}`,{
-                products: [
-                    {
-                        productId:item._id,
-                        quantity: 1
-                      
-                    },
-                ] 
-            }).then(res=>{
-                console.log('cart updated ')
-                console.log(res.data);
-                setUserCart(res.data); //update cart context 
-    
-            }).catch(err=>{
-                console.log('Error is',err);
-            })     
-        }catch(error){}    
+        if(user.username != null){
+            try{
+                const res = await axiosJWT.put(
+                    `http://localhost:5000/api/cart/find/${user._id}`,{
+                    products: [
+                        {
+                            productId:item._id,
+                            quantity: 1
+                        
+                        },
+                    ] 
+                }).then(res=>{
+                    console.log('cart updated ')
+                    console.log(res.data);
+                    setUserCart(res.data); //update cart context 
+        
+                }).catch(err=>{
+                    console.log('Error is',err);
+                })     
+            }catch(error){} 
+        }
+        else{
+            console.log("not logged in, cannot add to cart");
+        }
+        
     }
 
     function addToWishlist(item){

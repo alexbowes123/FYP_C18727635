@@ -141,7 +141,13 @@ const BasketHeader = () => {
            
             } catch(error){}
         };
-        getCart();
+
+        if(user.username!=null){
+            getCart();
+        }else{
+            console.log("not logged in, cannot display cart on checkout page")
+        }
+       
         
     },[]); // Dependency: when the category changes, run the useEffect
 
@@ -162,7 +168,6 @@ const BasketHeader = () => {
                     <Right>
                         <PriceDetails>Price</PriceDetails>
                         <TotalDetails>Total</TotalDetails>
-                        <button onClick={getCartNow()}>Get cart</button>
                     </Right>
                 </Wrapper>
             </Banner>

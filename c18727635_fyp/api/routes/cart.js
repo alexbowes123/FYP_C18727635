@@ -1,10 +1,5 @@
-//use Cart model
-
 const Cart = require("../models/Cart");
 const {verifyTokenAndAdmin, verifyToken} = require("./verifyToken");
-
-// var mongoose = require('mongoose');
-// var ObjectId = require('mongoose').Types.ObjectId; 
 
 const router = require("express").Router();
 
@@ -27,13 +22,9 @@ router.post("/", async(req,res)=>{
 router.put("/find/:userId", async (req,res)=>{
     console.log("in put request!");
 
-    // if a productid is already in the cart, 
-            //update the quantity for that item,
-    // else
-            // add that item normally like below
-
-    //check if the cart for this user already has this productId in it
-   
+    // check if the productId in body is already in the cart
+    // if so, update the quantity for that item
+    // else add the new item to the products array in the cart
 
     try{
         console.log("userid is" + req.params.userId);
