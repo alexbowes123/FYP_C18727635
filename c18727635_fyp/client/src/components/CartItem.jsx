@@ -1,6 +1,7 @@
 import styled from "styled-components"
-import { useEffect, useState} from "react";
+import { useContext, useEffect, useState} from "react";
 import axios from "axios";
+import { UserContext, CartContext } from "../userContext";
 
 const Container = styled.div`
     padding: 20px;
@@ -15,10 +16,20 @@ const Price = styled.div`
 
 `
 
+const Quantity = styled.div`
+`
+
+const ItemTotal = styled.div`
+`
+const FinalTotal = styled.div`
+`
+
 const CartItem = ({item}) =>{
 
 
     const [product, setProduct] = useState([]);
+
+    const {userCart,setUserCart} = useContext(CartContext);
 
     useEffect(()=>{
    
@@ -41,6 +52,14 @@ const CartItem = ({item}) =>{
         
     },[]); 
 
+    // const Total = ({ product, item }) => (
+    //     <h3>
+    //       {product.price.reduce((sum, product.price) => (
+    //         sum = item.quantity * product.price;
+    //       ), 0)}
+    //     </h3>
+    // )
+
     return(
         <Container>
               <Title>
@@ -49,6 +68,16 @@ const CartItem = ({item}) =>{
             <Price>
                 <h4>€{product.price}</h4>
             </Price>
+            <Quantity>
+                <h4>{item.quantity}</h4>
+            </Quantity>
+            <ItemTotal>
+                <h4></h4>
+
+            </ItemTotal>
+            <FinalTotal>
+
+            </FinalTotal>
         </Container>
     )
 

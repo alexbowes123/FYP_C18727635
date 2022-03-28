@@ -66,7 +66,13 @@ const Product = ({item}) => {
                     products: [
                         {
                             productId:item._id,
-                            quantity: 1
+                            quantity: 1,
+                            title:item.title,
+                            desc:item.desc,
+                            categories:item.categories,
+                            size:item.size,
+                            color:item.color,
+                            price:item.price
                         
                         },
                     ] 
