@@ -3,6 +3,9 @@
 const Cart = require("../models/Cart");
 const {verifyTokenAndAdmin, verifyToken} = require("./verifyToken");
 
+// var mongoose = require('mongoose');
+// var ObjectId = require('mongoose').Types.ObjectId; 
+
 const router = require("express").Router();
 
 //create a cart for a user 
@@ -24,17 +27,71 @@ router.post("/", async(req,res)=>{
 router.put("/find/:userId", async (req,res)=>{
     console.log("in put request!");
 
+    // if a productid is already in the cart, 
+            //update the quantity for that item,
+    // else
+            // add that item normally like below
+
+    //check if the cart for this user already has this productId in it
+   
+
     try{
-        console.log("updating cart for user "+req.params.userId);
+        console.log("userid is" + req.params.userId);
+        const userID = req.params.userId;
+        const prodId = req.body.products[0].productId; //only 1 product will be in products array in body
+
+        let itemId;
+
+        //get a cart that contains the current user's id + contains a product with the specified id 
+       
+        //get the user's whole cart
+        const userCart = await Cart.findOne({ userId: userID })
+
+        //check each item in cart, find the object id of the product if it exists in the cart
+
+        for(var i = 0; i < userCart.products.length; i++) {
+           
+            //if the cart has a product with the same id as the product in the request body
+            if (userCart.products[i].productId == prodId) {
+                console.log("found a match with "+userCart.products[i].productId+" and " +prodId);
+                //get the specific object id 
+                console.log("id is" +userCart.products[i]._id);
+                itemId = userCart.products[i]._id;
+
+
+                //update the cart item's quantity with the object id
+
+                try{
+                    console.log("Updating quantity for item "+itemId);
+
+                    const updatedQuantity = await Cart.findOneAndUpdate({
+                        userId : req.params.userId
+                        ,"products._id" : itemId },{
+                            $inc : {"products.$.quantity" : 1} 
+                        }, 
+                        {new:true}
+                    );
+                    res.status(200).json(updatedQuantity);
+
+                }catch(error){
+                    console.log(error);
+                }
+
+                return;
+            }
+        }
+
+        //if the product id does not already exist in this cart
+        console.log("adding new item to cart");
         
-        updatedCart = await Cart.findOneAndUpdate({
+        const updatedCart = await Cart.findOneAndUpdate({
             userId: req.params.userId
         },{
-            $push: req.body
+            $push: req.body //add the product to the cart's products array
         },
         {new:true}
-    );
-    res.status(200).json(updatedCart);
+        );
+        res.status(200).json(updatedCart);
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
