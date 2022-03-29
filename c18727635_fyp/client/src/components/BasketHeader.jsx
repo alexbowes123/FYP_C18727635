@@ -1,11 +1,9 @@
-import { UserContext } from "../userContext";
-import { React , useState, useEffect} from "react";
+import { React , useState, useEffect, useContext} from "react";
+import { UserContext, CartContext } from "../userContext";
 import styled from "styled-components";
-import { useContext } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import CartItem from "./CartItem";
-
 
 
 const Container = styled.div`
@@ -136,7 +134,7 @@ const BasketHeader = () => {
 
                 // output products retrieved from db    
                 console.log("cart Retrieved is",res.data);
-                setCart(res.data.products);
+                setCart(res.data);
 
            
             } catch(error){}
@@ -158,7 +156,7 @@ const BasketHeader = () => {
                 <Wrapper>
                     <Left>
                         <Details>Order Details</Details>
-                        {cart.map(item=>(
+                        {cart.products?.map(item=>(
                 <CartItem item={item} key = {item.id}/>
             ))}
                     </Left>
@@ -167,7 +165,8 @@ const BasketHeader = () => {
                     </Center>
                     <Right>
                         <PriceDetails>Price</PriceDetails>
-                        <TotalDetails>Total</TotalDetails>
+                        <TotalDetails>Total is ${cart.cartTotal}</TotalDetails>
+                    
                     </Right>
                 </Wrapper>
             </Banner>

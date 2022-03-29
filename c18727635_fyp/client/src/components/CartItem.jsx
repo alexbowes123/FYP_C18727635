@@ -31,26 +31,26 @@ const CartItem = ({item}) =>{
 
     const {userCart,setUserCart} = useContext(CartContext);
 
-    useEffect(()=>{
+    // useEffect(()=>{
    
     
         // FUNCTION TO GET PRODUCTS
-        const getCart = async () =>{
-            try{
+    //     const getCart = async () =>{
+    //         try{
             
-                const res = await axios.get(`http://localhost:5000/api/products/find/${item.productId}`);
+    //             const res = await axios.get(`http://localhost:5000/api/products/find/${item.productId}`);
 
 
-                // output products retrieved from db    
-                console.log("Item Retrieved is",res.data);
-                setProduct(res.data);
+    //             // output products retrieved from db    
+    //             console.log("Item Retrieved is",res.data);
+    //             setProduct(res.data);
 
            
-            } catch(error){}
-        };
-        getCart();
+    //         } catch(error){}
+    //     };
+    //     getCart();
         
-    },[]); 
+    // },[]); 
 
     // const Total = ({ product, item }) => (
     //     <h3>
@@ -63,21 +63,17 @@ const CartItem = ({item}) =>{
     return(
         <Container>
               <Title>
-                <h4>{product.title}</h4>
+                <h4>{item.title}</h4>
             </Title>
             <Price>
-                <h4>€{product.price}</h4>
+                <h4>€{item.price}</h4>
             </Price>
             <Quantity>
                 <h4>{item.quantity}</h4>
             </Quantity>
             <ItemTotal>
                 <h4></h4>
-
             </ItemTotal>
-            <FinalTotal>
-
-            </FinalTotal>
         </Container>
     )
 

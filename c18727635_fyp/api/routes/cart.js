@@ -58,7 +58,7 @@ router.put("/find/:userId", async (req,res)=>{
                     const updatedQuantity = await Cart.findOneAndUpdate({
                         userId : req.params.userId
                         ,"products._id" : itemId },{
-                            $inc : {"products.$.quantity" : 1} 
+                            $inc : {"products.$.quantity" : 1, "cartTotal" : req.body.products[0].price}
                         }, 
                         {new:true}
                     );
@@ -68,6 +68,22 @@ router.put("/find/:userId", async (req,res)=>{
                     console.log(error);
                 }
 
+                // const aggreg = await Cart.aggregate(
+                //     [
+                //         {"$match" : { 
+                //             "userId" : req.params.userId, 
+                //             "products._id" : itemId,
+                //             }
+                //         }
+                //         ,{"$sum" : { 
+                //                 "products.$.itemTotal" : ["$products.$.price", "$products.$.quantity"]
+                //             }
+                            
+                //         }
+                //     ]
+                // );
+
+                // res.status(200).json(aggreg);
                 return;
             }
         }
@@ -78,7 +94,8 @@ router.put("/find/:userId", async (req,res)=>{
         const updatedCart = await Cart.findOneAndUpdate({
             userId: req.params.userId
         },{
-            $push: req.body //add the product to the cart's products array
+            $push: req.body,//add the product to the cart's products array,
+            $inc: {"cartTotal" : req.body.products[0].price}
         },
         {new:true}
         );
