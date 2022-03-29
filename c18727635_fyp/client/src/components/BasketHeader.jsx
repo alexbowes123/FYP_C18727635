@@ -85,28 +85,16 @@ const Input = styled.input`
 `
 
 
-const Logo = styled.h1`
-  font-weight:bolder;
-  color: white;
+
+
+
+
+const Items = styled.div`
+    display: inline-block;
+    padding-left: 12%;
+    width: 80%;
 `
 
-
-
-const MenuItem = styled.div`
-    font-size:14px;
-    cursor:pointer;
-    margin-left:25px;
-    color: white;
-`
-
-const headers = {
-    'token': "Bearer "+Cookies.get('authorization'),
-    'Content-Type': 'application/json'
-}
-
-const data = {
-    "token": Cookies.get('refresh')
-}
 
 
 
@@ -156,9 +144,6 @@ const BasketHeader = () => {
                 <Wrapper>
                     <Left>
                         <Details>Order Details</Details>
-                        {cart.products?.map(item=>(
-                <CartItem item={item} key = {item.id}/>
-            ))}
                     </Left>
                     <Center>
                         <Details>Quantity</Details>
@@ -169,6 +154,11 @@ const BasketHeader = () => {
                     
                     </Right>
                 </Wrapper>
+                <Items>
+                        {cart.products?.map(item=>(
+                            <CartItem item={item} key = {item.id}/>
+                        ))}    
+                </Items>
             </Banner>
         </Container>
         
