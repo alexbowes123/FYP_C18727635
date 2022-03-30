@@ -94,7 +94,7 @@ const CartItem = ({item}) =>{
     useEffect(()=>{
         console.log("quantity is now" + item.quantity);
 
-    },[item.quantity])
+    },[userCart])
 
 
 

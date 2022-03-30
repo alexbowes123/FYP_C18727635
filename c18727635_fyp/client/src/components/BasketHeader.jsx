@@ -135,7 +135,7 @@ const BasketHeader = () => {
         }
        
         
-    },[]); // Dependency: when the category changes, run the useEffect
+    },[cart]); 
 
  
     return (
