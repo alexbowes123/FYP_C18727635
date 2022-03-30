@@ -103,7 +103,7 @@ const Navbar = () => {
     let navigate = useNavigate()
 
     useEffect(()=>{
-        console.log("userCart is", userCart);
+        console.log("nav userCart is", userCart);
     },[userCart])
 
     

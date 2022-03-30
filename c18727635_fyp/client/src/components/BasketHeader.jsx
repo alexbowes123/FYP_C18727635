@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Cookies from "js-cookie";
 import axios from "axios";
 import CartItem from "./CartItem";
+import PayPal from "./PayPal";
 
 
 const Container = styled.div`
@@ -104,38 +105,41 @@ const BasketHeader = () => {
     const {user,setUser} = useContext(UserContext);
 
     const [cart,setCart] = useState([]);
+
+    const {userCart,setUserCart} = useContext(CartContext);
     
-    function getCartNow()  {
-        console.log("cart is a",cart);
-    }
+  
+
+    const getCart = async () =>{
+        try{
+        
+            const res = await axios.get(`http://localhost:5000/api/cart/find/${user._id}`);
+
+            // output products retrieved from db    
+            console.log("cart Retrieved is",res.data);
+            setCart(res.data);
+            
+        } catch(error){}
+    };
  
 
     useEffect(()=>{
-
     
-        // FUNCTION TO GET PRODUCTS
-        const getCart = async () =>{
-            try{
-            
-                const res = await axios.get(`http://localhost:5000/api/cart/find/${user._id}`);
-
-
-                // output products retrieved from db    
-                console.log("cart Retrieved is",res.data);
-                setCart(res.data);
-
-           
-            } catch(error){}
-        };
+        // GET PRODUCTS IF USERNAME IS SET
 
         if(user.username!=null){
             getCart();
         }else{
             console.log("not logged in, cannot display cart on checkout page")
         }
-       
-        
-    },[cart]); 
+    },[]); 
+
+    useEffect(()=>{
+
+        //re render when the cart context changes (as quantity changes)
+        getCart()
+
+    },[userCart]);
 
  
     return (
@@ -150,15 +154,26 @@ const BasketHeader = () => {
                     </Center>
                     <Right>
                         <PriceDetails>Price</PriceDetails>
-                        <TotalDetails>Total is ${cart.cartTotal}</TotalDetails>
+                        {user.username!=null ? <TotalDetails>Total is €{cart.cartTotal}</TotalDetails>
+                        : <TotalDetails>Total is €0.00</TotalDetails>}
                     
                     </Right>
                 </Wrapper>
+                {user.username!=null ?
                 <Items>
                         {cart.products?.map(item=>(
                             <CartItem item={item} key = {item.id}/>
                         ))}    
                 </Items>
+                :
+                <Items></Items>}
+
+                { (user.username!= null && cart.cartTotal >1) ? (
+                    <PayPal/>
+                ) : (
+                    <h2>Cart is empty</h2>
+                
+                )}
             </Banner>
         </Container>
         
