@@ -202,6 +202,33 @@ router.put("/deduct/:userId", async (req,res)=>{
     }
 });
 
+router.put("/emptyCart/:userId", async (req,res)=>{
+
+    console.log("purchase made, removing all items from user's cart")
+
+    try{
+        //get the user's cart, empty it and reset the cart total to 0
+        const removeAllItems = await Cart.findOneAndUpdate(
+            {
+                "userId" : req.params.userId
+            },
+            {
+                "$set": { "products": [], "cartTotal": 0 }
+            }
+        );
+            
+        console.log("all items removed from cart");
+        res.status(200).json(removeAllItems);
+    
+    }catch(error){
+        console.log(error);
+        res.status(500).json(error);
+    }
+});
+
+
+
+
 //get a cart for a specific user
 router.get("/find/:userId", async(req,res)=>{
     try{

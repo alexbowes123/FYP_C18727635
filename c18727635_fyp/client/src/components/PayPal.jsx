@@ -1,7 +1,19 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useContext, useRef } from 'react'
+import { UserContext, CartContext } from "../userContext";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { axiosJWT } from "../refresh"
 
 export default function Paypal(){
+
     const paypal = useRef()
+
+    let navigate = useNavigate();
+
+    const {userCart,setUserCart} = useContext(CartContext);
+
+    const {user,setUser} = useContext(UserContext);
+
 
     useEffect(()=>{
         window.paypal.Buttons({
@@ -10,10 +22,10 @@ export default function Paypal(){
                     intent: "CAPTURE",
                     purchase_units: [
                         {
-                            description: "Cool looking table",
+                            description: "Goods from BlackBelt",
                             amount: {
                                 currency_code: "EUR",
-                                value: 650.00
+                                value: userCart.cartTotal
                             }
                         }
                     ]
@@ -22,6 +34,28 @@ export default function Paypal(){
             onApprove: async (data, actions) =>{
                 const order = await actions.order.capture();
                 console.log(order);
+
+                console.log("trying to clear the cart");
+               
+                //remove items in cart from product array after creating order document
+                try{
+                    const res = await axiosJWT.put(
+                        `http://localhost:5000/api/cart/emptyCart/${user._id}`,{
+
+                        }
+                    ).then(res=>{
+                        console.log('cart item deducted ')
+                        console.log(res.data);
+                        setUserCart(res.data); //update cart context 
+            
+                    }).catch(err=>{
+                        console.log('Error is up in',err);
+                    })     
+                }catch(error){
+                    console.log(error);
+                } 
+
+                navigate("../Purchase")
             },
             onError: (err)=>{
                 console.log(err)
