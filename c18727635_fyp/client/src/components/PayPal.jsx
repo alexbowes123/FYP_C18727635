@@ -40,7 +40,7 @@ export default function Paypal(){
                 //remove items in cart from product array after creating order document
                 try{
                     const res = await axiosJWT.put(
-                        `http://localhost:5000/api/cart/emptyCart/${user._id}`,{
+                        `/api/cart/emptyCart/${user._id}`,{
 
                         }
                     ).then(res=>{

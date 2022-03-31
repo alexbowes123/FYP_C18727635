@@ -6,6 +6,8 @@ import Checkout from "./pages/Checkout";
 import Logout from "./pages/Logout";
 import Purchase from "./pages/Purchase";
 import React from "react";
+import "./App.css"; //imported to target overall body
+
 import {
   BrowserRouter as Router,
   Routes,

@@ -62,7 +62,7 @@ const Product = ({item}) => {
         if(user.username != null){
             try{
                 const res = await axiosJWT.put(
-                    `http://localhost:5000/api/cart/find/${user._id}`,{
+                    `/api/cart/find/${user._id}`,{
                     products: [
                         {
                             productId:item._id,

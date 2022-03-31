@@ -11,9 +11,10 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { axiosJWT } from "../refresh"
 
+
 import { useNavigate } from "react-router-dom";
 
-const logoutURL = "http://localhost:5000/api/auth/logout"
+const logoutURL = "/api/auth/logout"
 
 const Container = styled.div`
     height: 60px; 

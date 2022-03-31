@@ -22,11 +22,16 @@ const Price = styled.div`
 `
 
 const Quantity = styled.div`
-overflow: hidden
+padding:1%;
+border: solid 3px green;
 `
 const QuantityBox = styled.div`
     text-align:center;
     background-color:white;
+    display: inline-block;
+    width: 20px;
+  
+
    
 `
 
@@ -39,12 +44,15 @@ const IconPlus = styled.div`
     background-color:#00ff00;  
     text-align:center;
     border-radius:10px;
+    display: inline-block;
 
 `
 const IconMin = styled.div`
    
     background-color:red;
     text-align:center;
+    border-radius:10px;
+    display: inline-block;
 
    
 `
@@ -65,7 +73,7 @@ const CartItem = ({item}) =>{
     //     const getCart = async () =>{
     //         try{
             
-    //             const res = await axios.get(`http://localhost:5000/api/products/find/${item.productId}`);
+    //             const res = await axios.get(`/api/products/find/${item.productId}`);
 
 
     //             // output products retrieved from db    
@@ -104,7 +112,7 @@ const CartItem = ({item}) =>{
         if(user.username != null){
             try{
                 const res = await axiosJWT.put(
-                    `http://localhost:5000/api/cart/find/${user._id}`,{
+                    `/api/cart/find/${user._id}`,{
                     products: [
                         {
                             productId:item.productId,
@@ -140,7 +148,7 @@ const CartItem = ({item}) =>{
         if(user.username != null){
             try{
                 const res = await axiosJWT.put(
-                    `http://localhost:5000/api/cart/deduct/${user._id}`,{
+                    `/api/cart/deduct/${user._id}`,{
                     products: [
                         {
                             productId:item.productId,

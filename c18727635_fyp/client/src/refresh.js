@@ -2,10 +2,14 @@ import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-const refreshUrl = "http://localhost:5000/api/auth/refresh";
+const refreshUrl = "/api/auth/refresh";
 
 
-export const axiosJWT = axios.create(); 
+export const axiosBASE = axios.create({baseURL:"http://34.241.68.244:5000/"});
+
+export const axiosJWT = axios.create({baseURL:"http://34.241.68.244:5000/"}); 
+
+// axiosJWT.get("/api")
 
 export const setupAxios = async () => {
 
@@ -53,7 +57,7 @@ export  const refreshToken = async () => {
         //the 403 is due to an invalid token being passed here
 
         
-        const res = await axios.post(refreshUrl, {token: Cookies.get('refresh')});
+        const res = await axiosBASE.post(refreshUrl, {token: Cookies.get('refresh')});
         
         //this has empty data for access and refresh?
      

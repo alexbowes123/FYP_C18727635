@@ -3,6 +3,7 @@ import { UserContext, CartContext } from "../userContext";
 import styled from "styled-components";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { axiosBASE } from "../refresh";
 import CartItem from "./CartItem";
 import PayPal from "./PayPal";
 
@@ -93,7 +94,13 @@ const Input = styled.input`
 const Items = styled.div`
     display: inline-block;
     padding-left: 12%;
-    width: 80%;
+    width: 65%;
+`
+
+const PayPalBox = styled.div`
+    margin:auto;
+    width:50%;
+    padding-top: 5%;
 `
 
 
@@ -113,7 +120,7 @@ const BasketHeader = () => {
     const getCart = async () =>{
         try{
         
-            const res = await axios.get(`http://localhost:5000/api/cart/find/${user._id}`);
+            const res = await axiosBASE.get(`api/cart/find/${user._id}`);
 
             // output products retrieved from db    
             console.log("cart Retrieved is",res.data);
@@ -169,7 +176,7 @@ const BasketHeader = () => {
                 <Items></Items>}
 
                 { (user.username!= null && cart.cartTotal >1) ? (
-                    <PayPal/>
+                    <PayPalBox><PayPal/></PayPalBox>
                 ) : (
                     <h2>Cart is empty</h2>
                 
