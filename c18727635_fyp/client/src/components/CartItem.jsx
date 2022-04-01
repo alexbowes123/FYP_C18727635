@@ -7,37 +7,34 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 
 const Container = styled.div`
-    padding: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    border: 4px solid red;
-
+    border: 2px solid black;
 `
 const Title = styled.div`
-
+    width: 20%;
+    text-align: center;
 `
 const Price = styled.div`
-
+    width: 10%;
+    text-align: center;
 `
 
 const Quantity = styled.div`
-padding:1%;
-border: solid 3px green;
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    // border: solid 3px green;
+    width: 30%;
 `
 const QuantityBox = styled.div`
     text-align:center;
     background-color:white;
-    display: inline-block;
-    width: 20px;
-  
-
-   
+    width: 35px;
 `
 
-const ItemTotal = styled.div`
-`
-const FinalTotal = styled.div`
+const ItemPrice = styled.h4`
 `
 const IconPlus = styled.div`
    
@@ -45,6 +42,7 @@ const IconPlus = styled.div`
     text-align:center;
     border-radius:10px;
     display: inline-block;
+    height:50%;
 
 `
 const IconMin = styled.div`
@@ -53,8 +51,18 @@ const IconMin = styled.div`
     text-align:center;
     border-radius:10px;
     display: inline-block;
+    height: 50%;
+`
 
-   
+const ImageBgrnd = styled.div`
+    width: 99px;
+    height: 80px;
+    background-color:white;
+`
+
+const Image = styled.img`
+    width: 99px;
+    height: 80px; 
 `
 
 const CartItem = ({item}) =>{
@@ -122,7 +130,9 @@ const CartItem = ({item}) =>{
                             categories:item.categories,
                             size:item.size,
                             color:item.color,
-                            price:item.price
+                            price:item.price,
+                            img:item.img
+
                         
                         },
                     ] 
@@ -158,7 +168,8 @@ const CartItem = ({item}) =>{
                             categories:item.categories,
                             size:item.size,
                             color:item.color,
-                            price:item.price
+                            price:item.price,
+                            img:item.img
                         
                         },
                     ] 
@@ -183,16 +194,16 @@ const CartItem = ({item}) =>{
 
     return(
         <Container>
-              <Title>
-                <h4>{item.title}</h4>
-            </Title>
+
+            <ImageBgrnd><Image src = {item.img}/></ImageBgrnd>
+            <Title><h4>{item.title}</h4></Title>
             <Quantity>
                 <IconMin>
                     <button style={{border:"none", cursor:"pointer", backgroundColor:"red"}} onClick={()=>{RemoveFromCart(item)}}>      
                         <RemoveOutlinedIcon/>
                     </button>
                 </IconMin>
-                <QuantityBox><h4>{item.quantity}</h4></QuantityBox>
+                <QuantityBox><ItemPrice>{item.quantity}</ItemPrice></QuantityBox>
                 <IconPlus>
                     <button style={{border:"none", borderRadius:"10px", cursor:"pointer", backgroundColor:"#00ff00"}} onClick={()=>{addToCart(item)}}>      
                         <AddOutlinedIcon/>

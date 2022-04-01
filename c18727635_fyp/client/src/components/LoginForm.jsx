@@ -8,19 +8,13 @@ import Cookies from "js-cookie";
 import { UserContext, CartContext } from "../userContext";
 
 
-
-// const Container = styled.div`
-//     height: 60px; 
-//     background-color: #232323;
-// `
-
 const Wrapper = styled.div`
     padding: 0px 20px;
     display: flex;
 
     justify-content: space-between;
     background-color: #232323;
-    height:430px;
+    height:440px;
 
  
 `
@@ -56,7 +50,7 @@ const Logo = styled.h1`
   font-weight:bolder;
   color: #232323;
   text-align:center;
-  height: 30%;
+  height: 20%;
 `
 
 const Message = styled.h3`
@@ -96,17 +90,22 @@ const FormLabel = styled.div`
     width: 100px;
 `
 
-const Input = styled.input`
-  font-size: 18px;
- 
 
-  background: papayawhip;
-  border: none;
+const Input = styled.input`
+  font-size: 18px; 
+  background: white;
+  border: 1px solid dark-grey;
   border-radius: 3px;
   ::placeholder {
     color: palevioletred;
   }
 `;
+
+const Button = styled.button`
+    font-size: 18px;
+    background: white;
+    border: 1px solid dark-grey;
+`
 
 
 
@@ -145,9 +144,24 @@ function LoginForm() {
         }
     }
 
+    function validateEmail (email) {
+        console.log("in validate")
+        const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        console.log(regexp.test(email));
+        
+        return regexp.test(email);
+      }
+
   
     const submitLogin = async(e) =>
     {
+
+        const emailVerify = validateEmail(login.email);
+
+        if(!emailVerify){
+            alert("Invalid email entered");
+            return;
+        }
        
         e.preventDefault();
         axiosBASE.post(loginUrl,{
@@ -196,6 +210,13 @@ function LoginForm() {
     {
        
         e.preventDefault();
+
+        const emailVerify = validateEmail(register.email);
+
+        if(!emailVerify){
+            alert("Invalid email entered");
+            return;
+        }
 
         // create a user 
         axiosBASE.post(registerUrl,{
@@ -250,14 +271,14 @@ function LoginForm() {
                               
                             </FormItems> 
                             <FormItems>
-                                    <button>Login</button>     
+                                    <Button>Login</Button>     
                             </FormItems>
                         </Form>
                     </UserForm>
                
                 </Left>
                 <Right>
-                    <Logo>Don't have an account? Sign up.</Logo>
+                    <Logo>Don't have an account?<br/>Sign up.</Logo>
                 <UserForm>
                         <Form onSubmit={(e)=>submit(e)}> 
                         <FormItems>
@@ -273,7 +294,7 @@ function LoginForm() {
                            <Input type="password" name="password" onChange={(e)=>handleRegister(e)} id="password" value={register.password} required/>
                         </FormItems> 
                         <FormItems>  
-                           <button>submit</button>
+                           <Button>submit</Button>
                         </FormItems>
                        </Form>
                     </UserForm>

@@ -92,6 +92,14 @@ const data = {
     "token": Cookies.get('refresh')
 }
 
+const LogoutButton = styled.button`
+    font-size: 12px;
+    background: white;
+    border: 1px solid dark-grey;
+    font-weight: bolder;
+`
+
+
 
 
 
@@ -123,7 +131,7 @@ const Navbar = () => {
             //the username disappears when the token is refreshed or the dom re renders
             console.log("user is",user);
             //placeholder visit register after logging out
-            navigate('../logout');
+            navigate('../');
 
         }).catch(err=>{
             console.log('Error is',err);
@@ -146,25 +154,26 @@ const Navbar = () => {
                 </Center>
                 <Right>
                    
-                    {/* Display a user's username */}
-                    {user.username != null ? <Message>{user.username}</Message>: <Message>Not logged in</Message> }   
-                    {user.username != null ? <button onClick={handleLogout} style ={{marginLeft:30}}>LOGOUT</button>: null }  
+                    {/* If the logged username is not null, display the name,
+                    else, display LOGIN that user can click to visit login page */}
 
-                
-                    {/* <Link to="/register" style={{ textDecoration: 'none' }}> <MenuItem>REGISTER</MenuItem></Link> */}
-                    <Link to="/login" style={{ textDecoration: 'none' }}><MenuItem>
-                        <AccountBoxOutlined/>
-                    </MenuItem></Link>
+                    {user.username != null 
+                    ?   <Message>{user.username}</Message>
+                    :   <Link to="/login" style={{ textDecoration: 'none' }}><MenuItem> 
+                            <Message>Login</Message>
+                        </MenuItem></Link> }
+
+                    {user.username != null ? <LogoutButton onClick={handleLogout} style ={{marginLeft:30}}>LOGOUT</LogoutButton>: null }  
                    
                     <Link to="/checkout" style={{ textDecoration: 'none' }}><MenuItem>
                     {userCart != null? <Badge badgeContent = {userCart.products.length} color="primary"> <ShoppingCartOutlined/></Badge> : <Badge color="primary"> <ShoppingCartOutlined/></Badge> } 
                     </MenuItem></Link>
 
-                    <Link to="/wishlist" style={{ textDecoration: 'none' }}><MenuItem>
+                    {/* <Link to="/wishlist" style={{ textDecoration: 'none' }}><MenuItem>
                         <Badge badgeContent={1} color="primary">
                         <FavoriteOutlined/>
                         </Badge>
-                    </MenuItem></Link>
+                    </MenuItem></Link> */}
                 </Right>
             </Wrapper>
         </Container>

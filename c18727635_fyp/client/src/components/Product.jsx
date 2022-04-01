@@ -72,7 +72,8 @@ const Product = ({item}) => {
                             categories:item.categories,
                             size:item.size,
                             color:item.color,
-                            price:item.price
+                            price:item.price,
+                            img: item.img
                         
                         },
                     ] 

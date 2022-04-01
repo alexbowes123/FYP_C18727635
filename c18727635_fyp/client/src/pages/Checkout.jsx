@@ -9,6 +9,9 @@ import Footer from "../components/Footer";
 import Copyright from "../components/Copyright";
 
 const Container = styled.div`
+
+    height: 100vh;
+   
 `
 const Message = styled.h3`
 
@@ -17,10 +20,11 @@ const Message = styled.h3`
     color: black;
     width: 95%;
     margin: 0 auto;
-    height: 30px;
-    padding-top:30px;
+    height: 10%;
+    padding-top:2%;
 
 `
+
 
 const Checkout = () => {
 

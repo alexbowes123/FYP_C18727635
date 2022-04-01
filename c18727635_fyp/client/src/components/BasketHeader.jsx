@@ -9,14 +9,12 @@ import PayPal from "./PayPal";
 
 
 const Container = styled.div`
-    height: 800px; 
+    height: 65%; 
     background-color: #d2d4cd;
+    border: 5px solid black;
     width: 95%;
     margin: 0 auto;
     margin-bottom: 5%;
-
-  
-
 `
 const Banner = styled.div`
     height: 50px; 
@@ -27,7 +25,6 @@ const Wrapper = styled.div`
     display: flex;
     align-items:center;
     justify-content: space-between;
- 
 `
 
 const Left = styled.div`
@@ -47,7 +44,6 @@ const Right = styled.div`
     display:flex;
     align-items:center;
     justify-content:flex-end;
-
 `
 
 
@@ -68,12 +64,10 @@ const PriceDetails = styled.span`
     font-weight:bolder;
     margin:auto;
     padding-top:20px;
-
-
 `
 
 const TotalDetails = styled.span`
-    font-size: 14px;
+    font-size: 24px;
     cursor: pointer;
     color: black;
     font-weight:bolder;
@@ -81,31 +75,67 @@ const TotalDetails = styled.span`
     padding-top:20px;
 `
 
-const Input = styled.input`
-    border:none;
-
+const CartContent = styled.div`
+    display:flex; 
+    flex-direction:row;    
 `
 
-
-
-
-
+const Input = styled.input`
+    border:none;
+`
 
 const Items = styled.div`
     display: inline-block;
-    padding-left: 12%;
-    width: 65%;
+    height: 480px;
+    width: 50%;
+    overflow-y: scroll;
 `
+
+
+
+const CheckoutInputs = styled.div`
+    width: 50%;
+`
+
+
+const UserForm = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: min-content;
+    padding: 10px;
+`
+const Form = styled.form`
+    width: 100%;
+`
+
+const FormItems = styled.div`
+    display:flex;
+    justify-content: center;
+    margin: 10px 0;
+`
+
+const FormLabel = styled.div`
+    width: 100px;
+`
+
+
+const InputAddr = styled.input`
+  font-size: 18px; 
+  background: white;
+  border: 1px solid dark-grey;
+  border-radius: 3px;
+  ::placeholder {
+    color: palevioletred;
+  }
+`;
 
 const PayPalBox = styled.div`
     margin:auto;
-    width:50%;
+    width:30%;
     padding-top: 5%;
+    display:flex;
 `
-
-
-
-
 
 const BasketHeader = () => {
 
@@ -156,34 +186,60 @@ const BasketHeader = () => {
                     <Left>
                         <Details>Order Details</Details>
                     </Left>
-                    <Center>
-                        <Details>Quantity</Details>
+                    <Center>  
                     </Center>
                     <Right>
-                        <PriceDetails>Price</PriceDetails>
-                        {user.username!=null ? <TotalDetails>Total is €{cart.cartTotal}</TotalDetails>
-                        : <TotalDetails>Total is €0.00</TotalDetails>}
-                    
+                        <Details>Payment Information</Details>  
                     </Right>
-                </Wrapper>
-                {user.username!=null ?
-                <Items>
-                        {cart.products?.map(item=>(
-                            <CartItem item={item} key = {item.id}/>
-                        ))}    
-                </Items>
-                :
-                <Items></Items>}
-
-                { (user.username!= null && cart.cartTotal >1) ? (
-                    <PayPalBox><PayPal/></PayPalBox>
-                ) : (
-                    <h2>Cart is empty</h2>
-                
-                )}
+                </Wrapper> 
             </Banner>
+            <CartContent>
+                {user.username!=null ?
+                    <Items>
+                            {cart.products?.map(item=>(
+                                <CartItem item={item} key = {item.id}/>
+                            ))}    
+                    </Items>
+                    :
+                    <Items></Items>}
+           
+                { (user.username!= null && cart.cartTotal >1) ? (
+                        <CheckoutInputs>
+                            <UserForm>
+                                <Form> 
+                                    <FormItems>
+                                        <FormLabel><label htmlFor="address1"><b>Address L1:</b></label></FormLabel>
+                                        <InputAddr type="text" name="address1"  id="address1"   required/>
+                                    </FormItems>
+                                    <FormItems>
+                                        <FormLabel><label htmlFor="address2"><b>Address L2:</b></label></FormLabel>
+                                        <InputAddr type="text" name="address2"  id="address2" required/>
+                                    </FormItems>  
+                                    <FormItems>
+                                        <FormLabel><label htmlFor="county"><b>County:</b></label></FormLabel>
+                                        <InputAddr type="text" name="county"  id="county" required/>
+                                    </FormItems>  
+                                    <FormItems>
+                                        <FormLabel><label htmlFor="country"><b>Country:</b></label></FormLabel>
+                                        <InputAddr type="text" name="country"  id="country" required/>
+                                    </FormItems>  
+                                    <FormItems>
+                                    {user.username!=null ? <TotalDetails>Total is €{cart.cartTotal}</TotalDetails>
+                                        : <TotalDetails>Total is €0.00</TotalDetails>}
+                                
+                                    </FormItems>
+                                </Form> 
+                            </UserForm>
+                            <PayPalBox>
+                                <PayPal/>
+                            </PayPalBox>           
+                        </CheckoutInputs>
+                    ) : (
+                       <CheckoutInputs></CheckoutInputs>
+                    
+                    )}
+            </CartContent>
         </Container>
-        
     )
 }
 
