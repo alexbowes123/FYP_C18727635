@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Products from "../components/Products";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import {
     BrowserRouter as Router,

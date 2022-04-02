@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 
 //import axios to get products from the db
 import axios from "axios";
-import { axiosJWT } from "../refresh"
+import { axiosBASE, axiosJWT } from "../refresh"
 import LoginForm from "./LoginForm";
 
 const Container = styled.div`
@@ -16,6 +16,7 @@ const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
 `
 
 const Products = ({cat,filters,sort}) => {
@@ -29,28 +30,29 @@ const Products = ({cat,filters,sort}) => {
 
     //when filters are updated, update the products    
     const [filteredProducts,setFilteredProducts] = useState([]);
+
+      // FUNCTION TO GET PRODUCTS
+      const getProducts = async () =>{
+        try{
+            //run the axios.interceptor to genereate the token before this request
+            const res = await axiosBASE.get(
+                cat
+                ? `/api/products?category=${cat}` 
+                // : "/api/products");
+                : "/api/products", { headers: {"token" : "Bearer "+Cookies.get('authorization')} });
+
+
+            // output products retrieved from db    
+            console.log(res);
+            setProducts(res.data);
+        } catch(error){}
+    };
  
 
     useEffect(()=>{
 
-        console.log("token is" + Cookies.get('authorization'));
+        // console.log("token is" + Cookies.get('authorization'));
 
-        // FUNCTION TO GET PRODUCTS
-        const getProducts = async () =>{
-            try{
-                //run the axios.interceptor to genereate the token before this request
-                const res = await axiosJWT.get(
-                    cat
-                    ? `/api/products?category=${cat}` 
-                    // : "/api/products");
-                    : "/api/products", { headers: {"token" : "Bearer "+Cookies.get('authorization')} });
-
-
-                // output products retrieved from db    
-                console.log(res);
-                setProducts(res.data);
-            } catch(error){}
-        };
         getProducts();
         
     },[cat]); // Dependency: when the category changes, run the useEffect

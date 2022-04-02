@@ -3,7 +3,6 @@ import  styled  from "styled-components";
 import Announcement from "../components/Announcement";
 import Categories from "../components/Categories";
 import Copyright from "../components/Copyright";
-import Products from "../components/Products";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
@@ -20,7 +19,6 @@ const Home = () => {
                 <Navbar/>
                 <Announcement/>
                 <Categories/>
-                <Products/>
                 <Footer/>
                 <Copyright/>
             </Root>    

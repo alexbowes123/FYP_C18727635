@@ -40,19 +40,6 @@ const Language = styled.span`
     cursor: pointer;
     color: white;
 `
-const SearchContainer = styled.div`
-    border: 0.5px solid lightgray;
-    display:flex;
-    align-items:center;
-    margin-left:25px;
-    padding: 5px;
-    background-color: white;
-`
-
-const Input = styled.input`
-    border:none;
-
-`
 
 const Center = styled.div`
     flex:1;
@@ -100,8 +87,6 @@ const LogoutButton = styled.button`
 
 
 
-
-
 const Navbar = () => {
 
     const {user,setUser} = useContext(UserContext);
@@ -142,11 +127,6 @@ const Navbar = () => {
             <Wrapper>
                 <Left>
                     <Language>ENG</Language>
-                    <SearchContainer>
-                        <Input/>
-                        <Search style = {{color: "gray", fontSize: 16}}/>
-                    </SearchContainer>
-
                 </Left>
                 <Center>
                 <Link to="/" style={{ textDecoration: 'none' }}><Logo>Blackbelt.</Logo></Link>

@@ -57,7 +57,7 @@ router.get("/find/:id", async (req, res) => {
 });
 
 // // Get all products
-router.get("/", verifyToken, async (req, res) => {
+router.get("/",  async (req, res) => {
     console.log("user in request is");
     console.log(req.user);
     const qNew = req.query.new  // get newest 
@@ -86,31 +86,4 @@ router.get("/", verifyToken, async (req, res) => {
     
 });
 
-// //Get user stats
-// //Get how many users were made in each month (1 = jan, 2 = feb)
-// router.get("/stats", verifyTokenAndAdmin, async (req, res)=>{
-//     const date = new Date();
-//     const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
-
-//     try{
-
-//         const data = await User.aggregate([
-//             {$match: {createdAt: {$gte: lastYear}}},
-//             {
-//                 $project:{
-//                     month: { $month: "$createdAt" }
-//                 },
-//             },
-//             {
-//                 $group:{
-//                     _id: "$month",
-//                     total:{$sum: 1},
-//                 }
-//             }
-//         ]);
-//         res.status(200).json(data);
-//     }catch(error) {
-//         res.status(500).json(err);
-//     }
-// })
 module.exports = router
