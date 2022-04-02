@@ -6,6 +6,8 @@ const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
+const orderRoute = require("./routes/order");
+
 const cookieParser = require("cookie-parser");
 
 const cors = require('cors'); // resolves cross origin issues
@@ -37,6 +39,7 @@ app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
 app.use("/api/cart", cartRoute);
+app.use("/api/order",orderRoute);
 
 //CORS - accept requests from all urls
 app.use((req, res, next) => {

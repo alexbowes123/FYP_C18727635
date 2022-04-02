@@ -2,7 +2,6 @@ import { Badge, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { CartContext, UserContext } from "../userContext";
 import { AccountBoxOutlined,FavoriteOutlined, Search, ShoppingCartOutlined } from "@material-ui/icons";
-// import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 import React from "react";
 import styled from "styled-components";
@@ -169,11 +168,9 @@ const Navbar = () => {
                     {userCart != null? <Badge badgeContent = {userCart.products.length} color="primary"> <ShoppingCartOutlined/></Badge> : <Badge color="primary"> <ShoppingCartOutlined/></Badge> } 
                     </MenuItem></Link>
 
-                    {/* <Link to="/wishlist" style={{ textDecoration: 'none' }}><MenuItem>
-                        <Badge badgeContent={1} color="primary">
-                        <FavoriteOutlined/>
-                        </Badge>
-                    </MenuItem></Link> */}
+                    <Link to="/order" style={{ textDecoration: 'none' }}><MenuItem> 
+                        <AccountBoxOutlined/>
+                    </MenuItem></Link>
                 </Right>
             </Wrapper>
         </Container>

@@ -119,6 +119,7 @@ function LoginForm() {
     const registerUrl = "/api/auth/register";
     const loginUrl = "/api/auth/login";
     const cartUrl = "/api/cart"
+    const orderUrl = "/api/order"
 
     const {user,setUser} = useContext(UserContext);
 
@@ -206,8 +207,8 @@ function LoginForm() {
         password: ""
     })
 
-    function submit(e)
-    {
+    const submit = async(e) => {
+    
        
         e.preventDefault();
 
@@ -225,6 +226,18 @@ function LoginForm() {
             password: register.password
 
         }).then(res=>{
+
+            //CREATE AN ORDERLIST FOR THE NEW USER
+            axiosBASE.post(orderUrl,{
+                userId: res.data._id,
+                receipts: [
+
+                ]
+            })
+
+      
+
+            console.log("order created, now on to cart");
 
             //CREATE A CART FOR THE NEW USER
             axiosBASE.post(cartUrl,{

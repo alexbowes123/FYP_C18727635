@@ -5,6 +5,7 @@ import Registration from "./pages/Registration";
 import Checkout from "./pages/Checkout";
 import Logout from "./pages/Logout";
 import Purchase from "./pages/Purchase";
+import Order from "./pages/Order";
 import React from "react";
 import "./App.css"; //imported to target overall body
 
@@ -42,6 +43,7 @@ const App = () => {
                             <Route exact path='/checkout' element={<Checkout/>}/>
                             <Route exact path='/logout' element={<Logout/>}/>
                             <Route exact path='/purchase' element={<Purchase/>}/>
+                            <Route exact path='/order' element={<Order/>}/>
                             {/* bring to page of products by category */}
                             <Route path='/products/:category' element={<ProductList/>} />
                             {/* search for an individual product */}

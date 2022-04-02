@@ -35,6 +35,37 @@ export default function Paypal(){
                 const order = await actions.order.capture();
                 console.log(order);
 
+                //create a receipt for the user in their orderList
+                try{
+                    const recipt = await axiosJWT.put(
+                        `/api/order/find/${user._id}`,{
+                            receipts:[
+                                {
+                                    reciptId: order.id,
+                                    orderDate: order.create_time,
+                                    payerName: order.payer.name.surname,
+                                    payerEmail: order.payer.email_address,
+                                    purchaseCurrency: order.purchase_units[0].amount.currency_code,
+                                    purchaseAmount: order.purchase_units[0].amount.value,
+                                    orderStatus: order.status
+                                    
+                                },
+                            ]
+                        }
+                    ).then(res=>{
+                        console.log('order list updated ')
+                        console.log(res.data);
+                    }).catch(err=>{
+                        console.log('Error is',err);
+                    })    
+                    
+                }catch(error){
+                    console.log("error adding receipt is:", + error);
+                }
+
+
+
+
                 console.log("trying to clear the cart");
                
                 //remove items in cart from product array after creating order document
