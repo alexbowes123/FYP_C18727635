@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 
     justify-content: space-between;
     background-color: #232323;
-    height:440px;
+    height:60vh;
 
  
 `
@@ -226,6 +226,8 @@ function LoginForm() {
         password: ""
     })
 
+    //submitting a form for registering a new user
+
     const submit = async(e) => {
     
        
@@ -235,6 +237,11 @@ function LoginForm() {
 
         if(!emailVerify){
             alert("Invalid email entered");
+            return;
+        }
+
+        if(register.password != register.confirmPassword){
+            alert("Password and Confirm Password must match.")
             return;
         }
 
@@ -332,6 +339,10 @@ function LoginForm() {
                             <FormLabel><label htmlFor="password"><b>Password:</b></label></FormLabel>
                            <Input type="password" name="password" onChange={(e)=>handleRegister(e)} id="password" value={register.password} required/>
                         </FormItems> 
+                        <FormItems>
+                            <FormLabel><label htmlFor="password2"><b>Confirm Password:</b></label></FormLabel>
+                           <Input type="password" name="confirmPassword" onChange={(e)=>handleRegister(e)} id="confirmPassword" value={register.confirmassword} required/>
+                        </FormItems>
                         <FormItems>  
                            <Button>submit</Button>
                         </FormItems>
