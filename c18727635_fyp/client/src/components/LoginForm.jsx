@@ -5,7 +5,7 @@ import axios from "axios";
 import { axiosBASE } from "../refresh";
 import styled from "styled-components";
 import Cookies from "js-cookie";
-import { UserContext, CartContext } from "../userContext";
+import { UserContext, CartContext, WishlistContext } from "../userContext";
 
 
 const Wrapper = styled.div`
@@ -118,13 +118,15 @@ function LoginForm() {
 
     const registerUrl = "/api/auth/register";
     const loginUrl = "/api/auth/login";
-    const cartUrl = "/api/cart"
-    const orderUrl = "/api/order"
+    const cartUrl = "/api/cart";
+    const orderUrl = "/api/order";
+    const wishlistUrl = "/api/wishlist";
 
     const {user,setUser} = useContext(UserContext);
 
     const {userCart,setUserCart} = useContext(CartContext);
 
+    const { userWishlist, setUserWishlist } = useContext(WishlistContext);
 
 
     const [login, setLogin] = useState({
@@ -139,6 +141,17 @@ function LoginForm() {
             const getCart = await axiosBASE.get(`/api/cart/find/${userData._id}`)
 
             return getCart.data;
+
+        }catch(err){
+            console.log(err);
+        }
+    }
+
+    const getUserWishlist = async(userData) => {
+        try{
+
+            const getWishlist = await axiosBASE.get(`/api/cart/find/${userData._id}`)
+            return getWishlist.data;
 
         }catch(err){
             console.log(err);
@@ -182,7 +195,13 @@ function LoginForm() {
      
             const cartData = await getUserCart(res.data);
 
+            //GET WISHLIST WHEN LOGGING IN
+
+            const wishlistData = await getUserWishlist(res.data);
+
             setUserCart({...cartData}); //spread operator an object
+
+            setUserWishlist({...wishlistData});
 
             navigate('../'); 
 
@@ -235,9 +254,16 @@ function LoginForm() {
                 ]
             })
 
+            console.log("Order list created, now creating wishlist")
+            axiosBASE.post(wishlistUrl,{
+                userId: res.data._id,
+                products: [
+                 
+                ]
+            })
       
 
-            console.log("order created, now on to cart");
+            console.log("wishlist created, now on to cart");
 
             //CREATE A CART FOR THE NEW USER
             axiosBASE.post(cartUrl,{

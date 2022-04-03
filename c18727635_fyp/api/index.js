@@ -7,6 +7,7 @@ const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
+const wishlistRoute = require("./routes/wishlist");
 
 const cookieParser = require("cookie-parser");
 
@@ -40,6 +41,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
 app.use("/api/cart", cartRoute);
 app.use("/api/order",orderRoute);
+app.use("/api/wishlist",wishlistRoute);
 
 //CORS - accept requests from all urls
 app.use((req, res, next) => {

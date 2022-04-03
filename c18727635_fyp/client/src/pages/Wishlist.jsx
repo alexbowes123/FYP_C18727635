@@ -4,9 +4,10 @@ import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
 import { useContext } from "react";
 import { UserContext } from "../userContext";
-import BasketHeader from "../components/BasketHeader";
+import WishlistHeader from "../components/WishlistHeader";
 import Footer from "../components/Footer";
 import Copyright from "../components/Copyright";
+import { FavoriteOutlined } from "@material-ui/icons";
 
 const Container = styled.div`
 
@@ -17,16 +18,25 @@ const Message = styled.h3`
 
     font-size:25px;
     font-weight:bolder;
-    color: black;
-    width: 95%;
+    color: white;
     margin: 0 auto;
-    height: 10%;
+    height: 5%;
     padding-top:2%;
+    pading-left: ;
+    background-color: black;
+    text-align:center;
 
 `
 
+const HeartLogo = styled.div`
+    background-color: black;
+    color:white;
+    align-items: center;
+    text-align:center;
+`
 
-const Checkout = () => {
+
+const Order = () => {
 
     const {user,setUser} = useContext(UserContext);
 
@@ -34,8 +44,11 @@ const Checkout = () => {
         <Container>
             <Navbar/>
             <Announcement/>
-            <Message>Your Cart</Message>
-            <BasketHeader/>
+            <Message>Your Wishlist</Message>
+            <HeartLogo> 
+                <FavoriteOutlined/>
+            </HeartLogo>
+            <WishlistHeader/>
             <Footer/>
             <Copyright/>
         </Container>
@@ -43,4 +56,4 @@ const Checkout = () => {
 
 }
 
-export default Checkout
+export default Order

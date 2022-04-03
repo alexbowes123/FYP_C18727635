@@ -93,8 +93,43 @@ const Product = ({item}) => {
         
     }
 
-    function addToWishlist(item){
-        console.log("clicking wishlist!: "+item.title);
+    // function addToWishlist(item){
+
+    const addToWishlist = async(item) => {
+            
+        //update a cart based on the current user's id
+        if(user.username != null){
+            try{
+                const res = await axiosJWT.put(
+                    `/api/wishlist/find/${user._id}`,{
+                    products: [
+                        {
+                            productId:item._id,
+                            quantity: 1,
+                            title:item.title,
+                            desc:item.desc,
+                            categories:item.categories,
+                            size:item.size,
+                            color:item.color,
+                            price:item.price,
+                            img: item.img,
+                            inStock: item.inStock
+                        
+                        },
+                    ] 
+                }).then(res=>{
+                    console.log('wishlist updated ')
+                    console.log(res.data);
+        
+                }).catch(err=>{
+                    console.log('Error is',err);
+                })     
+            }catch(error){} 
+        }
+        else{
+            console.log("not logged in, cannot add to cart");
+        }
+        
     }
 
     return (

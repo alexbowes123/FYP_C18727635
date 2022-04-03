@@ -11,6 +11,7 @@ const Container = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     border: 2px solid black;
+    background-color:white;
 `
 const Title = styled.div`
     width: 20%;
@@ -73,46 +74,11 @@ const CartItem = ({item}) =>{
     const {userCart,setUserCart} = useContext(CartContext);
 
     const {user,setUser} = useContext(UserContext);
-
-    // useEffect(()=>{
-   
-    
-        // FUNCTION TO GET PRODUCTS
-    //     const getCart = async () =>{
-    //         try{
-            
-    //             const res = await axios.get(`/api/products/find/${item.productId}`);
-
-
-    //             // output products retrieved from db    
-    //             console.log("Item Retrieved is",res.data);
-    //             setProduct(res.data);
-
-           
-    //         } catch(error){}
-    //     };
-    //     getCart();
-        
-    // },[]); 
-
-    // const Total = ({value }) => (
-    //     <h3>
-    //       Price: 
-
-    //       {(sum, value) => ({
-    //         sum = value.quantity * value.price,
-    //         return sum
-    //     }), 0}
-          
-    //     </h3>
-    //   )
-
+ 
     useEffect(()=>{
         console.log("quantity is now" + item.quantity);
 
     },[userCart])
-
-
 
     const addToCart = async(item) => {
             

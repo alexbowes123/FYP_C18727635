@@ -151,6 +151,10 @@ const Navbar = () => {
                     <Link to="/order" style={{ textDecoration: 'none' }}><MenuItem> 
                         <AccountBoxOutlined/>
                     </MenuItem></Link>
+
+                    <Link to="/wishlist" style={{ textDecoration: 'none' }}><MenuItem> 
+                        <FavoriteOutlined/>
+                    </MenuItem></Link>
                 </Right>
             </Wrapper>
         </Container>

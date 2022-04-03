@@ -24,8 +24,6 @@ const Products = ({cat,filters,sort}) => {
 
     //fetching data for products 
 
-
-    //an empty array
     const [products,setProducts] = useState([]);
 
     //when filters are updated, update the products    
@@ -50,8 +48,6 @@ const Products = ({cat,filters,sort}) => {
  
 
     useEffect(()=>{
-
-        // console.log("token is" + Cookies.get('authorization'));
 
         getProducts();
         
