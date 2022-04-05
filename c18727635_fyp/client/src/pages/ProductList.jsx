@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Announcement from "../components/Announcement";
+import Banner from "../components/Banner";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Products from "../components/Products";
@@ -58,7 +58,7 @@ const ProductList = () => {
     return (
         <Container>
             <Navbar/>
-            <Announcement/>
+            <Banner/>
             {cat != "bjj" ?   <Title>{cat}</Title>: <Title>Brazilian Jiu Jitsu</Title> }  
             <FilterContainer>
                 <Filter>

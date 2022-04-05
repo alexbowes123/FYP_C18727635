@@ -5,9 +5,9 @@ import axios from "axios";
 const refreshUrl = "/api/auth/refresh";
 
 
-export const axiosBASE = axios.create({baseURL:"http://34.241.68.244:5000/"});
+export const axiosBASE = axios.create({baseURL:"http://18.203.237.205:5000/"});
 
-export const axiosJWT = axios.create({baseURL:"http://34.241.68.244:5000/"}); 
+export const axiosJWT = axios.create({baseURL:"http://18.203.237.205:5000/"}); 
 
 // axiosJWT.get("/api")
 

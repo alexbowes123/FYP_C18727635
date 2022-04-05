@@ -1,7 +1,7 @@
 import React from "react";
 import  styled  from "styled-components";
 import Navbar from "../components/Navbar";
-import Announcement from "../components/Announcement";
+import Banner from "../components/Banner";
 import { useContext } from "react";
 import { UserContext } from "../userContext";
 import OrderHeader from "../components/OrderHeader";
@@ -33,7 +33,7 @@ const Order = () => {
     return(
         <Container>
             <Navbar/>
-            <Announcement/>
+            <Banner/>
             <Message>Order History</Message>
             <OrderHeader/>
             <Footer/>

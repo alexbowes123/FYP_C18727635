@@ -12,7 +12,7 @@ const Container = styled.div`
 
 `
 
-const Announcement = () => {
+const Banner = () => {
     return (
         <Container>
             SALE NOW ON! Buy 1 Jiu Jitsu Gi, get another HALF PRICE! (Not really)
@@ -20,4 +20,4 @@ const Announcement = () => {
     )
 }
 
-export default Announcement
+export default Banner

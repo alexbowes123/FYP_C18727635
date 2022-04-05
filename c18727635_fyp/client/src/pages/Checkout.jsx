@@ -1,7 +1,7 @@
 import React from "react";
 import  styled  from "styled-components";
 import Navbar from "../components/Navbar";
-import Announcement from "../components/Announcement";
+import Banner from "../components/Banner";
 import { useContext } from "react";
 import { UserContext } from "../userContext";
 import BasketHeader from "../components/BasketHeader";
@@ -33,7 +33,7 @@ const Checkout = () => {
     return(
         <Container>
             <Navbar/>
-            <Announcement/>
+            <Banner/>
             <Message>Your Cart</Message>
             <BasketHeader/>
             <Footer/>

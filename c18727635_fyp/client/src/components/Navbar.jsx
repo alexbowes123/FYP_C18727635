@@ -1,13 +1,12 @@
-import { Badge, Button } from "@material-ui/core";
+import { Badge } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { CartContext, UserContext } from "../userContext";
-import { AccountBoxOutlined,FavoriteOutlined, Search, ShoppingCartOutlined } from "@material-ui/icons";
+import { AccountBoxOutlined, FavoriteOutlined, ShoppingCartOutlined } from "@material-ui/icons";
 
 import React from "react";
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
 import Cookies from "js-cookie";
-import axios from "axios";
 import { axiosJWT } from "../refresh"
 
 
@@ -37,7 +36,6 @@ const Left = styled.div`
 
 const Language = styled.span`
     font-size: 14px;
-    cursor: pointer;
     color: white;
 `
 
@@ -74,6 +72,7 @@ const headers = {
     'Content-Type': 'application/json'
 }
 
+//pass the refresh token when logging out a user
 const data = {
     "token": Cookies.get('refresh')
 }

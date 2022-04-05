@@ -1,6 +1,6 @@
 import React from "react";
 import  styled  from "styled-components";
-import Announcement from "../components/Announcement";
+import Banner from "../components/Banner";
 import Categories from "../components/Categories";
 import Copyright from "../components/Copyright";
 import Footer from "../components/Footer";
@@ -17,7 +17,7 @@ const Home = () => {
         <div>
             <Root>
                 <Navbar/>
-                <Announcement/>
+                <Banner/>
                 <Categories/>
                 <Footer/>
                 <Copyright/>
