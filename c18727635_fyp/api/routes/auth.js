@@ -2,9 +2,8 @@ const router = require("express").Router();
 const User = require("../models/User");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
-const { rawListeners } = require("../models/User");
 const { application } = require("express");
-const {verifyTokenAndAdmin, verifyToken} = require("./verifyToken");
+const {verifyToken} = require("./verifyToken");
 
 
 
@@ -23,6 +22,7 @@ router.post("/register", async (req,res)=>{
     const newUser = new User({
         username: req.body.username,
         email: req.body.email,
+        //encrypt user's password before storing in database
         password: CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC).toString(),
     });
     try{
@@ -102,21 +102,21 @@ router.post("/login", async (req,res)=>{
         //find a user at with the passed email
         const user = await User.findOne({email: req.body.email});
         //if there is not a user
-        // !user && res.status(401).json("Wrong user");
         if(!user){
             console.log("no user exists");
-            return res.status(401).json("Wrong user");
+            return res.status(401).json("user does not exist");
 
         }
 
+
+        //get encrypted password from db, decrypt it and compare it to the password passed in the request body
 
         const hashedPassword = CryptoJS.AES.decrypt(
             user.password,
             process.env.PASS_SEC
         );
         const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
-        
-        // OriginalPassword !== req.body.password && res.status(401).json("Wrong password");
+    
         if(OriginalPassword !== req.body.password){
             console.log("password wrong");
             return res.status(401).json("Wrong password");

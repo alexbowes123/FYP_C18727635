@@ -3,12 +3,11 @@ const jwt = require("jsonwebtoken");
 const verifyToken = (req, res, next)=>{
     const authHeader = req.headers.token //token is being sent in the header 
 
-    console.log("authHeader");
-   
-
     if(authHeader){
-            const token = authHeader.split(" ")[1]; //this token is always the same for some reason?
-            console.log(token);
+
+            //split token header since it is in format "Bearer SDFSFFD..." to get the token without the bearer word
+            const token = authHeader.split(" ")[1];
+
         jwt.verify(token, process.env.JWT_SEC, (err, user)=>{
             if(err) return res.status(403).json("Token is not valid");
             req.user = user;
