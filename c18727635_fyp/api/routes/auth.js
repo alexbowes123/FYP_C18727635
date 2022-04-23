@@ -65,7 +65,7 @@ router.post("/refresh", async (req,res)=>{
 
         refreshTokens.push(newRefreshToken);
 
-        //new refrsh and access are reaching react
+        
         res.status(200).json({
             accessToken: newAccessToken,
             refreshToken: newRefreshToken

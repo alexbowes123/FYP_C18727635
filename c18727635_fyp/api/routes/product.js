@@ -60,14 +60,12 @@ router.get("/find/:id", async (req, res) => {
 router.get("/",  async (req, res) => {
     console.log("user in request is");
     console.log(req.user);
-    const qNew = req.query.new  // get newest 
+ 
     const qCategory = req.query.category // get in a certain category
     try {
         let products;
 
-        if(qNew){
-            products = await Product.find().sort({ createdAt: -1}).limit(1);
-        } else if(qCategory){
+       if(qCategory){
             products = await Product.find({
                 categories:{
                     $in:[qCategory],
