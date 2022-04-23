@@ -1,7 +1,6 @@
 import React,{useContext, useState} from "react";
 import { useNavigate } from "react-router-dom";
 
-import axios from "axios";
 import { axiosBASE } from "../refresh";
 import styled from "styled-components";
 import Cookies from "js-cookie";
@@ -262,6 +261,7 @@ function LoginForm() {
             })
 
             console.log("Order list created, now creating wishlist")
+            //CREATE A NEW WISHLIST FOR USER
             axiosBASE.post(wishlistUrl,{
                 userId: res.data._id,
                 products: [

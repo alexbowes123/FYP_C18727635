@@ -31,10 +31,6 @@ const Title = styled.h1`
     margin-bottom: 20px;
     fontWeight: bold;
 `
-const Button = styled.button`
-    font-size: 18px;
-    padding: 2px;
-`
 
 const CategoryItem = ({item}) => {
     return(
@@ -42,8 +38,7 @@ const CategoryItem = ({item}) => {
           <Link to={`/products/${item.cat}`}>
             <Image src = {item.img}/>
             <Info>
-                <Title><i>{item.title}</i></Title>
-                
+                <Title><i>{item.title}</i></Title> 
             </Info>
             </Link>
         </Container>

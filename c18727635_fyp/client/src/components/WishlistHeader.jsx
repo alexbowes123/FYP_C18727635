@@ -87,8 +87,7 @@ const WishlistHeader = () => {
         try{
         
             const res = await axiosBASE.get(`api/wishlist/find/${user._id}`);
-
-            // output products retrieved from db    
+ 
             console.log("wish list Retrieved is",res.data);
             setWishlist(res.data);
             

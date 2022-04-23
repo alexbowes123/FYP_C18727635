@@ -27,19 +27,20 @@ const Wrapper = styled.div`
  
 `
 
-const Left = styled.div`
+const Tagline = styled.div`
     flex:1;
     display:flex;
     align-items:center;
 `
 
 
-const Language = styled.span`
+const Slogan = styled.span`
     font-size: 14px;
     color: white;
+    font-style:oblique;
 `
 
-const Center = styled.div`
+const HomeButton = styled.div`
     flex:1;
     text-align:center;
 `
@@ -53,7 +54,7 @@ const Message = styled.h3`
 
     color:white;
 `
-const Right = styled.div`
+const NavButtons = styled.div`
     flex:1;
     display:flex;
     align-items:center;
@@ -108,13 +109,9 @@ const Navbar = () => {
             headers: headers
         }).then((response)=>{
             console.log(response);
-            user.username = null; //set user.username to null so the user's name and logout button will disappear
-            setUserCart(null); //empty cart context after logout
-
-            //the username disappears when the token is refreshed or the dom re renders
-            console.log("user is",user);
-            //placeholder visit register after logging out
-            navigate('../');
+            user.username = null;   //set user.username to null so the user's name and logout button will disappear
+            setUserCart(null);  //empty cart context after logout
+            navigate('../'); //navigate to home page to refresh page after logout
 
         }).catch(err=>{
             console.log('Error is',err);
@@ -124,16 +121,20 @@ const Navbar = () => {
     return (
         <Container>
             <Wrapper>
-                <Left>
-                    <Language>ENG</Language>
-                </Left>
-                <Center>
+
+                <Tagline>
+                    <Slogan>A Knockout in Online Retail</Slogan>
+                </Tagline>
+
+                <HomeButton>
                 <Link to="/" style={{ textDecoration: 'none' }}><Logo>Blackbelt.</Logo></Link>
-                </Center>
-                <Right>
+                </HomeButton>
+
+
+                <NavButtons>
                    
                     {/* If the logged username is not null, display the name,
-                    else, display LOGIN that user can click to visit login page */}
+                    else, display LOGIN button that user can click to visit login page */}
 
                     {user.username != null 
                     ?   <Message>{user.username}</Message>
@@ -143,6 +144,10 @@ const Navbar = () => {
 
                     {user.username != null ? <LogoutButton onClick={handleLogout} style ={{marginLeft:30}}>LOGOUT</LogoutButton>: null }  
                    
+
+
+                    {/* Icon buttons that user clicks to visit cart,orders and wishlist */}
+
                     <Link to="/checkout" style={{ textDecoration: 'none' }}><MenuItem>
                     {userCart != null? <Badge badgeContent = {userCart.products.length} color="primary"> <ShoppingCartOutlined/></Badge> : <Badge color="primary"> <ShoppingCartOutlined/></Badge> } 
                     </MenuItem></Link>
@@ -154,7 +159,7 @@ const Navbar = () => {
                     <Link to="/wishlist" style={{ textDecoration: 'none' }}><MenuItem> 
                         <FavoriteOutlined/>
                     </MenuItem></Link>
-                </Right>
+                </NavButtons>
             </Wrapper>
         </Container>
     )

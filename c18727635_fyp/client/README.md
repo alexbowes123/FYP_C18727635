@@ -1,70 +1,25 @@
-# Getting Started with Create React App
+Author: Alexander Bowes
+StudentID: C18727635
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**SUMMARY OF APPLICATION**
+Blackbelt is an E-Commerce web application which sells martial arts themed products.
+Users of Blackbelt can browse products by category, sign up, login, add items to carts and wishlists, as well
+as process transactions through paypal. After a purchase is handled, they can see details about their order in the orders page.
 
-## Available Scripts
+Blackbelt was heavily performance tested as part of the author's Final Year Project which included hosting 
+this application at the address **http://18.203.237.205/** and running tests through JMeter to determine the performance of the app.
 
-In the project directory, you can run:
+**RUNNING THE APPLICATION**
+1. open a terminal with Node Package Manager installed. 
+2. Navigate the terminal window to the root folder of the project "/c18727365_fyp".
+3. Open a second terminal window on the same directory.
+4. Navigate window 1 to "/c18727635_fyp/api" and run "npm install" to install the api's dependencies.
+5. Navigate window 2 to "/c18727635_fyp/client" and run "npm install" to install the client's dependencies.
+6. In "c18727635/api" run "npm start" to start up the server on port 5000.
+7. In "c18727635/client" run "npm start" to start the server on port 3000. This will open a window in a browser and display the application.
 
-### `npm start`
+**OTHER PLACES TO SEE THE APPLICATION**
+As mentioned, the application is available on the cloud at the address **http://18.203.237.205/**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Incase the app is not available through the cloud, the author recorded the app running through the cloud and 
+has the video available at this address: **https://youtu.be/7yY5W6g2grg**

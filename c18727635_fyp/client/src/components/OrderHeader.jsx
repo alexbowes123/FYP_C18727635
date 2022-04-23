@@ -101,7 +101,7 @@ const OrderHeader = () => {
         
             const res = await axiosBASE.get(`api/order/find/${user._id}`);
 
-            // output products retrieved from db    
+           
             console.log("order list Retrieved is",res.data);
             setOrder(res.data);
             

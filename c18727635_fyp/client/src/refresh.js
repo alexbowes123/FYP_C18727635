@@ -5,9 +5,9 @@ import axios from "axios";
 const refreshUrl = "/api/auth/refresh";
 
 
-export const axiosBASE = axios.create({baseURL:"http://18.203.237.205:5000/"});
+export const axiosBASE = axios.create({baseURL:"http://localhost:5000/"});
 
-export const axiosJWT = axios.create({baseURL:"http://18.203.237.205:5000/"}); 
+export const axiosJWT = axios.create({baseURL:"http://localhost:5000/"}); 
 
 // axiosJWT.get("/api")
 
@@ -31,9 +31,7 @@ export const setupAxios = async () => {
             //if the token has expired
             if(decodedToken.exp * 1000 < currentDate.getTime()){
                 console.log("refreshing token!")
-                const data = await refreshToken();
-                console.log(" refresh token data is");
-                console.log(data); //this is undefined currently
+                const data = await refreshToken(); //get a fresh access and refresh token
 
                 config.headers["token"] = "Bearer " + data.accessToken;
                 Cookies.set('authorization', data.accessToken);
@@ -49,7 +47,6 @@ export const setupAxios = async () => {
 
 export  const refreshToken = async () => {
     try{
-        console.log("in refreshToken func");
         console.log("before passing refresh, refresh is:");
         console.log(Cookies.get('refresh'));
 

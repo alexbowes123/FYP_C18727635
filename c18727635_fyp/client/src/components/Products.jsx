@@ -1,15 +1,10 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import {popularProducts} from "../data";
 import Product from "./Product";
-import user from "./LoginForm";
-import Cookies from "js-cookie";
-
 
 //import axios to get products from the db
-import axios from "axios";
-import { axiosBASE, axiosJWT } from "../refresh"
-import LoginForm from "./LoginForm";
+import { axiosBASE } from "../refresh"
+
 
 const Container = styled.div`
     padding: 20px;
@@ -20,7 +15,6 @@ const Container = styled.div`
 `
 
 const Products = ({cat,filters,sort}) => {
-    // console.log(cat,filters,sort);
 
     //fetching data for products 
 
@@ -32,12 +26,10 @@ const Products = ({cat,filters,sort}) => {
       // FUNCTION TO GET PRODUCTS
       const getProducts = async () =>{
         try{
-            //run the axios.interceptor to genereate the token before this request
             const res = await axiosBASE.get(
-                cat
-                ? `/api/products?category=${cat}` 
-                // : "/api/products");
-                : "/api/products", { headers: {"token" : "Bearer "+Cookies.get('authorization')} });
+                cat // if there is a category parameter
+                ? `/api/products?category=${cat}` //get products with the same category
+                : "/api/products" ); //else just get all products
 
 
             // output products retrieved from db    

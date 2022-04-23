@@ -43,13 +43,13 @@ const ProductList = () => {
     const location = useLocation();
     const cat = location.pathname.split("/")[2]
     const [filters, setFilters] = useState({})
-    const [sort, setSort] = useState("newest")
+    const [sort, setSort] = useState("all")
 
     const handleFilters = (e) => {
         const value = e.target.value;
         setFilters({
-            ...filters,
-            [e.target.name]: value,
+            ...filters, // spread operator used to append new value for
+            [e.target.name]: value, 
         });
     };
 
@@ -87,7 +87,7 @@ const ProductList = () => {
                 <Filter>
                     <FilterText>Sort Products:</FilterText>
                     <Select onChange={e=>setSort(e.target.value)}>
-                        <Option value="newest">Newest</Option>
+                        <Option value="all">All</Option>
                         <Option value ="asc">A-Z (ASC)</Option>
                         <Option value = "desc">A-Z (DES)</Option>
                         <Option value = "price-asc">PRICE (ASC)</Option>
