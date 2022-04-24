@@ -27,7 +27,8 @@ router.post("/register", async (req,res)=>{
     });
     try{
         const savedUser = await newUser.save();
-        res.status(200).json(savedUser);
+        //send 201 for newly created user
+        res.status(201).json(savedUser);
         console.log(savedUser);
     } catch (err) {
         res.status(500).json(err);
@@ -111,15 +112,15 @@ router.post("/login", async (req,res)=>{
 
         //get encrypted password from db, decrypt it and compare it to the password passed in the request body
 
-        const hashedPassword = CryptoJS.AES.decrypt(
+        const decryptedPassword = CryptoJS.AES.decrypt(
             user.password,
             process.env.PASS_SEC
         );
-        const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
+        const OriginalPassword = decryptedPassword.toString(CryptoJS.enc.Utf8);
     
         if(OriginalPassword !== req.body.password){
             console.log("password wrong");
-            return res.status(401).json("Wrong password");
+            return res.status(401).json("Email or Password do not match");
 
         }  
         
@@ -138,7 +139,6 @@ router.post("/login", async (req,res)=>{
         res.status(200).json({...others, accessToken, refreshToken});
         console.log("user logged in!");
     } catch(err){
-        console.log("potatoes");
         res.status(500).json(err);
     }
 });

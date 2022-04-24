@@ -26,12 +26,8 @@ const Products = ({cat,filters,sort}) => {
       // FUNCTION TO GET PRODUCTS
       const getProducts = async () =>{
         try{
-            const res = await axiosBASE.get(
-                cat // if there is a category parameter
-                ? `/api/products?category=${cat}` //get products with the same category
-                : "/api/products" ); //else just get all products
-
-
+            const res = await axiosBASE.get(`/api/products/${cat}`); //get products with the same category
+            
             // output products retrieved from db    
             console.log(res);
             setProducts(res.data);

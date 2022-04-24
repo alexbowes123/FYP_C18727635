@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { UserContext, CartContext } from "../userContext";
+import { UserContext, CartContext, WishlistContext} from "../userContext";
 import { useContext, useEffect } from "react";
 import axios from "axios";
 import { axiosJWT } from "../refresh"
@@ -50,6 +50,8 @@ const Product = ({item}) => {
     const {user,setUser} = useContext(UserContext);
 
     const {userCart,setUserCart} = useContext(CartContext);
+
+    const {userWishlist,setUserWishlist} = useContext(WishlistContext);
 
     useEffect(()=>{
         // console.log("updated Cart is", userCart);
@@ -120,6 +122,7 @@ const Product = ({item}) => {
                 }).then(res=>{
                     console.log('wishlist updated ')
                     console.log(res.data);
+                    setUserWishlist(res.data); //update cart context 
         
                 }).catch(err=>{
                     console.log('Error is',err);

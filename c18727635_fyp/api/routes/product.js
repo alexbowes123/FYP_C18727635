@@ -1,12 +1,14 @@
 //Use product model
 const Product = require("../models/Product");
-const {verifyTokenAndAdmin, verifyToken} = require("./verifyToken");
+const { verifyTokenAndAdmin } = require("./verifyToken");
 
 const router = require("express").Router();
 
 //create
-// ONLY AN ADMIN CAN CREATE A NEW PRODUCT
+// ONLY AN ADMIN ACCOUNT CAN CREATE A NEW PRODUCT
 router.post("/", verifyTokenAndAdmin, async (req, res)=>{
+    
+    //get product from request body
     const newProduct = new Product(req.body);
     
     try{
@@ -23,6 +25,7 @@ router.post("/", verifyTokenAndAdmin, async (req, res)=>{
 
 router.put("/:id", verifyTokenAndAdmin, async (req,res)=>{
     try{
+        //find existing product document by id paramter, update it with request body
         const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {
             $set: req.body
         },
@@ -56,12 +59,12 @@ router.get("/find/:id", async (req, res) => {
     
 });
 
-// // Get all products
-router.get("/",  async (req, res) => {
+// // Get products by catergory parameter in url
+router.get("/:category",  async (req, res) => {
     console.log("user in request is");
     console.log(req.user);
  
-    const qCategory = req.query.category // get in a certain category
+    const qCategory = req.params.category // get in a certain category
     try {
         let products;
 

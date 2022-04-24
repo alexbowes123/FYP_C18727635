@@ -24,3 +24,5 @@ As mentioned, the application is available on the cloud at the address **http://
 Incase the app is not available through the cloud, the author recorded the app running through the cloud and 
 has the video available at this address: **https://youtu.be/7yY5W6g2grg**
 
+If the reader wishes to use the Paypal Sandbox functionality to process a payment, please contact the author and they will provide 
+the dummy email  and password shown in the video above.

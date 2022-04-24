@@ -1,6 +1,6 @@
 import { Badge } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { CartContext, UserContext } from "../userContext";
+import { CartContext, UserContext, WishlistContext } from "../userContext";
 import { AccountBoxOutlined, FavoriteOutlined, ShoppingCartOutlined } from "@material-ui/icons";
 
 import React from "react";
@@ -53,6 +53,7 @@ const Logo = styled.h1`
 const Message = styled.h3`
 
     color:white;
+
 `
 const NavButtons = styled.div`
     flex:1;
@@ -78,11 +79,12 @@ const data = {
     "token": Cookies.get('refresh')
 }
 
-const LogoutButton = styled.button`
-    font-size: 12px;
-    background: white;
-    border: 1px solid dark-grey;
-    font-weight: bolder;
+const LogoutButton = styled.div`
+    font-size:14px;
+    cursor:pointer;
+    margin-left:25px;
+    color: white;
+    font-weight:bolder;
 `
 
 
@@ -92,6 +94,8 @@ const Navbar = () => {
     const {user,setUser} = useContext(UserContext);
 
     const {userCart,setUserCart} = useContext(CartContext);
+
+    const {userWishlist,setUserWishlist} = useContext(WishlistContext);
 
     let navigate = useNavigate()
 
@@ -111,6 +115,7 @@ const Navbar = () => {
             console.log(response);
             user.username = null;   //set user.username to null so the user's name and logout button will disappear
             setUserCart(null);  //empty cart context after logout
+            setUserWishlist(null); //empty wishlist after logout
             navigate('../'); //navigate to home page to refresh page after logout
 
         }).catch(err=>{
@@ -157,7 +162,7 @@ const Navbar = () => {
                     </MenuItem></Link>
 
                     <Link to="/wishlist" style={{ textDecoration: 'none' }}><MenuItem> 
-                        <FavoriteOutlined/>
+                    {userWishlist != null ? <Badge badgeContent = {userWishlist.products.length} color="primary"><FavoriteOutlined/></Badge> : <Badge color="primary"><FavoriteOutlined/></Badge> }
                     </MenuItem></Link>
                 </NavButtons>
             </Wrapper>
