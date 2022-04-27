@@ -56,7 +56,7 @@ const Footer = () => {
         <Container>
             <Left>
                 <Logo>Blackbelt.</Logo>
-                <Desc>DISCLAIMER: This application is not made for commercial use and does not process any real purchases.</Desc>
+                <Desc>This application is not made for commercial use. All images used under free license or were taken by author.</Desc>
                 <SocialContainer>
                     <SocialIcon color = "385999">
                         <Facebook/>
